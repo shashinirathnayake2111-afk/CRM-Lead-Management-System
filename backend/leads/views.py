@@ -5,7 +5,8 @@ from .db_utils import get_collection
 from .serializers import LeadSerializer, NoteSerializer
 from bson.objectid import ObjectId
 from datetime import datetime
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from django.contrib.auth.models import User
 
 class LeadListCreateView(APIView):
     permission_classes = [IsAuthenticated]
@@ -143,3 +144,20 @@ class DashboardStatsView(APIView):
             'totalEstimatedValue': total_estimated_value,
             'totalWonValue': total_won_value
         })
+
+class RegisterView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+        email = request.data.get('email')
+
+        if not username or not password or not email:
+            return Response({'error': 'Please provide username, password and email'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if User.objects.filter(username=username).exists():
+            return Response({'error': 'Username already exists'}, status=status.HTTP_400_BAD_REQUEST)
+
+        user = User.objects.create_user(username=username, email=email, password=password)
+        return Response({'message': 'User created successfully'}, status=status.HTTP_201_CREATED)

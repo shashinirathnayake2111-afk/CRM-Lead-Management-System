@@ -36,9 +36,7 @@ const Layout = ({ children }) => {
         } glass-dark border-r border-slate-800 transition-all duration-300 flex flex-col fixed h-full z-50`}
       >
         <div className="p-6 flex items-center gap-3">
-          <div className="bg-primary-500 p-2 rounded-lg">
-            <TrendingUp className="w-6 h-6 text-white" />
-          </div>
+          <img src="/logo.png" alt="Logo" className="w-10 h-10 rounded-xl shadow-lg shadow-primary-500/20 object-contain bg-white p-1" />
           {isSidebarOpen && (
             <motion.h1 
               initial={{ opacity: 0 }}
@@ -83,12 +81,20 @@ const Layout = ({ children }) => {
       {/* Main Content */}
       <main className={`flex-1 transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-20'}`}>
         <header className="h-20 glass-dark border-b border-slate-800 flex items-center justify-between px-8 sticky top-0 z-40">
-          <button 
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="p-2 hover:bg-slate-800 rounded-lg text-slate-400"
-          >
-            {isSidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              className="p-2 hover:bg-slate-800 rounded-lg text-slate-400"
+            >
+              {isSidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+            
+            {/* Logo and Name in Header */}
+            <div className="flex items-center gap-3 ml-2 lg:hidden">
+              <img src="/logo.png" alt="Logo" className="w-8 h-8 rounded-lg bg-white p-1" />
+              <h2 className="text-lg font-bold text-white tracking-tight">Uplift CRM</h2>
+            </div>
+          </div>
 
           <div className="flex items-center gap-4">
             <div className="text-right hidden sm:block">

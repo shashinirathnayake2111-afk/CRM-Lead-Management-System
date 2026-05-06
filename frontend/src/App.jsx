@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard';
 import LeadList from './pages/LeadList';
 import LeadForm from './pages/LeadForm';
 import LeadDetail from './pages/LeadDetail';
+import Signup from './pages/Signup';
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -26,6 +27,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
           <Route path="/leads" element={<PrivateRoute><LeadList /></PrivateRoute>} />
           <Route path="/leads/new" element={<PrivateRoute><LeadForm /></PrivateRoute>} />
