@@ -1,0 +1,14 @@
+{
+  "name": "uplift-crm",
+  "version": "1.0.0",
+  "description": "Full-stack CRM with Django and React",
+  "scripts": {
+    "install-all": "npm install --prefix frontend && pip install -r backend/requirements.txt",
+    "client": "npm run dev --prefix frontend",
+    "server": "cd backend && venv\\Scripts\\python manage.py runserver",
+    "dev": "concurrently \"npm run client\" \"npm run server\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
