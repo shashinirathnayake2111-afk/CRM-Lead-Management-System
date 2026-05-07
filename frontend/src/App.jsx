@@ -18,7 +18,18 @@ const PrivateRoute = ({ children }) => {
     </div>
   );
   
-  return user ? <Layout>{children}</Layout> : <Navigate to="/login" />;
+  return user ? <Layout>{children}</Layout> : <Navigate to="/auth" />;
+};
+
+const LandingRedirect = () => {
+  const { user, loading } = useAuth();
+  const hasVisited = localStorage.getItem('hasVisited');
+
+  if (loading) return null;
+  if (user) return <Navigate to="/" />;
+  
+  // If first time visiting, show signup. If returning, show login.
+  return hasVisited ? <Navigate to="/login" /> : <Navigate to="/signup" />;
 };
 
 function App() {
@@ -26,6 +37,7 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
+          <Route path="/auth" element={<LandingRedirect />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
@@ -33,7 +45,7 @@ function App() {
           <Route path="/leads/new" element={<PrivateRoute><LeadForm /></PrivateRoute>} />
           <Route path="/leads/:id" element={<PrivateRoute><LeadDetail /></PrivateRoute>} />
           <Route path="/leads/:id/edit" element={<PrivateRoute><LeadForm /></PrivateRoute>} />
-          <Route path="*" element={<Navigate to="/" />} />
+          <Route path="*" element={<Navigate to="/auth" />} />
         </Routes>
       </Router>
     </AuthProvider>

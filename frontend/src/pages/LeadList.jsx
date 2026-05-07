@@ -12,7 +12,8 @@ import {
   User,
   Building2,
   Mail,
-  Phone
+  Phone,
+  Globe
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -37,13 +38,20 @@ const LeadList = () => {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
+  const [sourceFilter, setSourceFilter] = useState('');
+  const [salespersonFilter, setSalespersonFilter] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchLeads = async () => {
     setLoading(true);
     try {
       const response = await api.get('/leads/', {
-        params: { search, status: statusFilter }
+        params: { 
+          search, 
+          status: statusFilter,
+          source: sourceFilter,
+          salesperson: salespersonFilter
+        }
       });
       setLeads(response.data);
     } catch (err) {
@@ -58,7 +66,7 @@ const LeadList = () => {
       fetchLeads();
     }, 300);
     return () => clearTimeout(delayDebounceFn);
-  }, [search, statusFilter]);
+  }, [search, statusFilter, sourceFilter, salespersonFilter]);
 
   return (
     <div className="space-y-6">
@@ -105,6 +113,22 @@ const LeadList = () => {
                 <option value="Lost">Lost</option>
               </select>
             </div>
+
+            <div className="relative">
+              <Globe className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+              <select
+                value={sourceFilter}
+                onChange={(e) => setSourceFilter(e.target.value)}
+                className="bg-slate-900/50 border border-slate-700 text-slate-300 pl-11 pr-8 py-2.5 rounded-xl focus:outline-none focus:border-primary-500 transition-all appearance-none cursor-pointer"
+              >
+                <option value="">All Sources</option>
+                <option value="Website">Website</option>
+                <option value="LinkedIn">LinkedIn</option>
+                <option value="Referral">Referral</option>
+                <option value="Cold Email">Cold Email</option>
+                <option value="Event">Event</option>
+              </select>
+            </div>
           </div>
         </div>
 
@@ -137,7 +161,7 @@ const LeadList = () => {
                 </tr>
               ) : (
                 leads.map((lead) => (
-                  <tr key={lead._id} className="hover:bg-white/5 transition-colors group">
+                  <tr key={lead.id} className="hover:bg-white/5 transition-colors group">
                     <td className="px-8 py-5">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-primary-400 font-bold border border-white/5">
@@ -167,7 +191,7 @@ const LeadList = () => {
                     <td className="px-8 py-5 text-right">
                       <div className="flex justify-end items-center gap-2">
                         <Link 
-                          to={`/leads/${lead._id}`}
+                          to={`/leads/${lead.id}`}
                           className="p-2 hover:bg-primary-500/10 text-slate-400 hover:text-primary-400 rounded-lg transition-all"
                         >
                           <ExternalLink className="w-5 h-5" />

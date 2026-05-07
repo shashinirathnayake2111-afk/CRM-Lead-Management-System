@@ -11,6 +11,12 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+# Load .env from project root
+BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR.parent / '.env')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -145,6 +151,6 @@ SIMPLE_JWT = {
 
 # MongoDB Settings (Custom)
 MONGODB_SETTINGS = {
-    'host': 'mongodb://localhost:27017',
-    'db': 'uplift_crm'
+    'host': os.getenv('MONGODB_URI', 'mongodb://localhost:27017'),
+    'db': os.getenv('DB_NAME', 'uplift_crm')
 }

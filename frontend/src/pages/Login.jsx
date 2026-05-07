@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Lock, Mail, Loader2, Eye, EyeOff, CheckCircle2 } from 'lucide-react';
+import { Lock, User, Loader2, Eye, EyeOff, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Login = () => {
@@ -19,6 +19,7 @@ const Login = () => {
     setError('');
     try {
       await login(email, password);
+      localStorage.setItem('hasVisited', 'true');
       navigate('/');
     } catch (err) {
       setError('Invalid email or password. Please try again.');
@@ -78,7 +79,7 @@ const Login = () => {
           </div>
 
           <div className="text-slate-500 text-sm">
-            © 2024 Uplift CRM. All rights reserved.
+            © 2026 Uplift CRM. All rights reserved.
           </div>
         </div>
       </div>
@@ -112,15 +113,15 @@ const Login = () => {
 
           <form onSubmit={handleSubmit} className="space-y-8">
             <div className="space-y-3">
-              <label className="text-sm font-medium text-slate-300 ml-1">Email Address</label>
+              <label className="text-sm font-medium text-slate-300 ml-1">Username</label>
               <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
                 <input
-                  type="email"
+                  type="text"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full bg-slate-900/40 border border-slate-800 text-white pl-12 pr-4 py-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary-500/40 focus:border-primary-500 transition-all placeholder:text-slate-600"
-                  placeholder="name@company.com"
+                  placeholder="Enter your username"
                   required
                 />
               </div>

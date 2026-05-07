@@ -31,6 +31,7 @@ const Signup = () => {
         email: formData.email,
         password: formData.password
       });
+      localStorage.setItem('hasVisited', 'true');
       navigate('/login');
     } catch (err) {
       setError(err.response?.data?.error || 'Registration failed. Please try again.');
@@ -90,7 +91,7 @@ const Signup = () => {
           </div>
 
           <div className="text-slate-500 text-sm">
-            © 2024 Uplift CRM. All rights reserved.
+            © 2026 Uplift CRM. All rights reserved.
           </div>
         </div>
       </div>

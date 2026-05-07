@@ -171,7 +171,7 @@ const LeadDetail = () => {
               <AnimatePresence initial={false}>
                 {notes.map((note) => (
                   <motion.div 
-                    key={note._id}
+                    key={note.id}
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     className="p-4 bg-slate-900/50 border border-slate-800 rounded-2xl space-y-2"
