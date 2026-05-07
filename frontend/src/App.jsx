@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard';
 import LeadList from './pages/LeadList';
 import LeadForm from './pages/LeadForm';
 import LeadDetail from './pages/LeadDetail';
+import Management from './pages/Management';
 import Signup from './pages/Signup';
 
 const PrivateRoute = ({ children }) => {
@@ -42,6 +43,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
           <Route path="/leads" element={<PrivateRoute><LeadList /></PrivateRoute>} />
+          <Route path="/management" element={<PrivateRoute><Management /></PrivateRoute>} />
           <Route path="/leads/new" element={<PrivateRoute><LeadForm /></PrivateRoute>} />
           <Route path="/leads/:id" element={<PrivateRoute><LeadDetail /></PrivateRoute>} />
           <Route path="/leads/:id/edit" element={<PrivateRoute><LeadForm /></PrivateRoute>} />

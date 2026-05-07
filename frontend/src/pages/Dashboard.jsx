@@ -14,7 +14,10 @@ import {
   ArrowUpRight,
   Calendar,
   Sparkles,
-  ArrowRight
+  ArrowRight,
+  Brain,
+  Zap,
+  Target
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 

@@ -11,7 +11,8 @@ import {
   Sparkles,
   ChevronLeft,
   ChevronRight,
-  Compass
+  Compass,
+  ShieldCheck
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -29,6 +30,7 @@ const Layout = ({ children }) => {
   const menuItems = [
     { name: 'Dashboard', icon: LayoutDashboard, path: '/' },
     { name: 'Leads', icon: Users, path: '/leads' },
+    { name: 'Management', icon: ShieldCheck, path: '/management' },
   ];
 
   return (
@@ -149,7 +151,7 @@ const Layout = ({ children }) => {
           </div>
         </header>
 
-        <div className="p-10 relative z-10 max-w-[1600px] mx-auto">
+        <div className="p-4 sm:p-8 relative z-10 w-full">
           <AnimatePresence mode="wait">
             <motion.div
               key={window.location.pathname}
