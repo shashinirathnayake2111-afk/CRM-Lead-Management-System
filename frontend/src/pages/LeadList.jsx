@@ -48,6 +48,7 @@ const LeadList = () => {
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [sourceFilter, setSourceFilter] = useState('');
+  const [salespersonFilter, setSalespersonFilter] = useState('');
   const navigate = useNavigate();
 
   const exampleLeads = [
@@ -69,7 +70,8 @@ const LeadList = () => {
         params: { 
           search, 
           status: statusFilter,
-          source: sourceFilter
+          source: sourceFilter,
+          salesperson: salespersonFilter
         }
       });
       if (response.data.length > 0) {
@@ -118,7 +120,7 @@ const LeadList = () => {
       fetchLeads();
     }, 400);
     return () => clearTimeout(delayDebounceFn);
-  }, [search, statusFilter, sourceFilter]);
+  }, [search, statusFilter, sourceFilter, salespersonFilter]);
 
   return (
     <motion.div 
@@ -194,6 +196,21 @@ const LeadList = () => {
               <option value="Referral">Partner Referral</option>
               <option value="Cold Email">Direct Outreach</option>
               <option value="Event">Industry Events</option>
+            </select>
+          </div>
+
+          <div className="flex items-center gap-3 px-6 py-3 bg-white/5 rounded-2xl border border-white/5">
+            <User className="w-5 h-5 text-indigo-400" />
+            <select
+              value={salespersonFilter}
+              onChange={(e) => setSalespersonFilter(e.target.value)}
+              className="bg-slate-900/50 text-xs font-black text-white uppercase tracking-[0.2em] outline-none pr-8 cursor-pointer border-none"
+            >
+              <option value="">All Account Managers</option>
+              <option value="Admin">Executive Admin</option>
+              <option value="John Doe">John Doe</option>
+              <option value="Jane Smith">Jane Smith</option>
+              <option value="Unassigned">Unassigned Pool</option>
             </select>
           </div>
         </div>

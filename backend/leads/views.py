@@ -20,12 +20,15 @@ class LeadListCreateView(generics.ListCreateAPIView):
         queryset = Lead.objects.all().order_by('-created_at')
         status_filter = self.request.query_params.get('status')
         source_filter = self.request.query_params.get('source')
+        salesperson_filter = self.request.query_params.get('salesperson')
         search = self.request.query_params.get('search')
 
         if status_filter:
             queryset = queryset.filter(status=status_filter)
         if source_filter:
             queryset = queryset.filter(source=source_filter)
+        if salesperson_filter:
+            queryset = queryset.filter(salesperson=salesperson_filter)
         if search:
             queryset = queryset.filter(
                 models.Q(name__icontains=search) |
