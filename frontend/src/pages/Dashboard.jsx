@@ -119,6 +119,7 @@ const Dashboard = () => {
   const [formLoading, setFormLoading] = useState(false);
   const [newLead, setNewLead] = useState({ name: '', email: '', status: 'New' });
   const [greeting, setGreeting] = useState('');
+  const [timeRange, setTimeRange] = useState('Last 6 Months');
 
   // Extract name from email for a more personal touch
   const displayName = useMemo(() => {
@@ -167,37 +168,46 @@ const Dashboard = () => {
     }
   };
 
-  const chartData = useMemo(() => ({
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-    datasets: [
-      {
-        label: 'Lead Acquisition',
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: (context) => {
-          const ctx = context.chart.ctx;
-          const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-          gradient.addColorStop(0, 'rgba(99, 102, 241, 0.8)');
-          gradient.addColorStop(1, 'rgba(99, 102, 241, 0.1)');
-          return gradient;
+  const chartData = useMemo(() => {
+    const isYTD = timeRange === 'Year to Date';
+    return {
+      labels: isYTD 
+        ? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+      datasets: [
+        {
+          label: 'Lead Acquisition',
+          data: isYTD 
+            ? [12, 19, 3, 5, 2, 0, 0, 0, 0, 0, 0, 0]
+            : [12, 19, 3, 5, 2, 0],
+          backgroundColor: (context) => {
+            const ctx = context.chart.ctx;
+            const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+            gradient.addColorStop(0, 'rgba(99, 102, 241, 0.8)');
+            gradient.addColorStop(1, 'rgba(99, 102, 241, 0.1)');
+            return gradient;
+          },
+          borderRadius: 8,
+          hoverBackgroundColor: 'rgba(99, 102, 241, 1)',
         },
-        borderRadius: 8,
-        hoverBackgroundColor: 'rgba(99, 102, 241, 1)',
-      },
-      {
-        label: 'Conversions',
-        data: [7, 11, 5, 8, 3, 6],
-        backgroundColor: (context) => {
-          const ctx = context.chart.ctx;
-          const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-          gradient.addColorStop(0, 'rgba(16, 185, 129, 0.8)');
-          gradient.addColorStop(1, 'rgba(16, 185, 129, 0.1)');
-          return gradient;
-        },
-        borderRadius: 8,
-        hoverBackgroundColor: 'rgba(16, 185, 129, 1)',
-      }
-    ]
-  }), []);
+        {
+          label: 'Conversions',
+          data: isYTD 
+            ? [7, 11, 5, 8, 3, 0, 0, 0, 0, 0, 0, 0]
+            : [7, 11, 5, 8, 3, 0],
+          backgroundColor: (context) => {
+            const ctx = context.chart.ctx;
+            const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+            gradient.addColorStop(0, 'rgba(16, 185, 129, 0.8)');
+            gradient.addColorStop(1, 'rgba(16, 185, 129, 0.1)');
+            return gradient;
+          },
+          borderRadius: 8,
+          hoverBackgroundColor: 'rgba(16, 185, 129, 1)',
+        }
+      ]
+    };
+  }, [timeRange]);
 
   const chartOptions = {
     responsive: true,
@@ -302,9 +312,13 @@ const Dashboard = () => {
                 </h3>
                 <p className="text-slate-500 text-sm font-medium mt-1">Bi-annual lead lifecycle analysis</p>
               </div>
-              <select className="bg-white/5 border border-white/10 text-slate-300 text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20">
-                <option>Last 6 Months</option>
-                <option>Year to Date</option>
+              <select 
+                value={timeRange}
+                onChange={(e) => setTimeRange(e.target.value)}
+                className="bg-white/5 border border-white/10 text-slate-300 text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
+              >
+                <option value="Last 6 Months">Last 6 Months</option>
+                <option value="Year to Date">Year to Date</option>
               </select>
             </div>
             
