@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import api from '../services/api';
+import { useAuth } from '../context/AuthContext';
 import { 
   Users, 
   Trophy, 
@@ -111,12 +112,20 @@ const StatCard = ({ title, value, icon: Icon, color, trend }) => {
 };
 
 const Dashboard = () => {
+  const { user } = useAuth();
   const [stats, setStats] = useState(null);
   const [leads, setLeads] = useState([]);
   const [loading, setLoading] = useState(true);
   const [formLoading, setFormLoading] = useState(false);
   const [newLead, setNewLead] = useState({ name: '', email: '', status: 'New' });
   const [greeting, setGreeting] = useState('');
+
+  // Extract name from email for a more personal touch
+  const displayName = useMemo(() => {
+    if (!user?.email) return 'Agent';
+    const namePart = user.email.split('@')[0];
+    return namePart.charAt(0).toUpperCase() + namePart.slice(1).replace(/[._]/g, ' ');
+  }, [user]);
 
   useEffect(() => {
     const hour = new Date().getHours();
@@ -254,7 +263,7 @@ const Dashboard = () => {
             <span className="text-[10px] font-black uppercase tracking-[0.3em]">Workspace Overview</span>
           </div>
           <h1 className="text-5xl font-black text-white tracking-tighter flex items-center gap-3">
-            {greeting}, <span className="text-gradient">Agent</span>
+            {greeting}, <span className="text-gradient">{displayName}</span>
           </h1>
           <p className="text-slate-400 mt-2 font-medium">You have <span className="text-indigo-400 font-bold">{stats?.newLeads} new leads</span> to review today.</p>
         </div>

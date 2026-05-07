@@ -1,3 +1,4 @@
+# pyrefly: ignore [missing-import]
 from rest_framework import serializers
 from .models import Lead, Note
 
@@ -11,6 +12,7 @@ class NoteSerializer(serializers.ModelSerializer):
         model = Note
         fields = '__all__'
 
+# pyrefly: ignore [missing-import]
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
