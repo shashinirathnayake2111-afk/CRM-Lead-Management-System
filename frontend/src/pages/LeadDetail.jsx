@@ -21,10 +21,12 @@ import {
   Info
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useAuth } from '../context/AuthContext';
 
 const LeadDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [lead, setLead] = useState(null);
   const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState('');
@@ -152,16 +154,6 @@ const LeadDetail = () => {
             <Edit className="w-4 h-4" />
             Edit Profile
           </Link>
-          
-          {user?.isAdmin && (
-            <button 
-              onClick={handleDelete}
-              className="flex-1 lg:flex-none px-8 py-4 bg-rose-500/5 hover:bg-rose-500/10 text-rose-400 rounded-2xl font-black transition-all flex items-center justify-center gap-3 border border-rose-500/10 hover:border-rose-500/20 uppercase tracking-widest text-xs"
-            >
-              <Trash2 className="w-4 h-4" />
-              Terminate
-            </button>
-          )}
         </div>
       </div>
 

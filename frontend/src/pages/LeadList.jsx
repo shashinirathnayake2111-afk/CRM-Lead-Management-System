@@ -24,6 +24,7 @@ import {
   Send
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useAuth } from '../context/AuthContext';
 
 const StatusBadge = ({ status }) => {
   const configs = {
@@ -43,6 +44,7 @@ const StatusBadge = ({ status }) => {
 };
 
 const LeadList = () => {
+  const { user } = useAuth();
   const [leads, setLeads] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -326,12 +328,6 @@ const LeadList = () => {
                                className="p-4 bg-white/5 hover:bg-indigo-500/20 text-slate-500 hover:text-indigo-400 rounded-2xl transition-all border border-white/10"
                              >
                                 <Edit2 className="w-5 h-5" />
-                             </button>
-                             <button 
-                               onClick={(e) => handleDelete(e, lead.id)}
-                               className="p-4 bg-white/5 hover:bg-rose-500/20 text-slate-500 hover:text-rose-400 rounded-2xl transition-all border border-white/10"
-                             >
-                                <Trash2 className="w-5 h-5" />
                              </button>
                           </div>
                         </div>
