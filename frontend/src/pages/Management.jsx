@@ -17,7 +17,10 @@ import {
   Zap,
   UserCircle,
   Clock,
-  ChevronRight
+  ChevronRight,
+  MessageSquare,
+  Send,
+  XCircle
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -86,6 +89,10 @@ const Management = () => {
     }
   ];
 
+  const [noteModal, setNoteModal] = useState({ open: false, leadId: null, leadName: '' });
+  const [noteContent, setNoteContent] = useState('');
+  const [submittingNote, setSubmittingNote] = useState(false);
+
   const fetchLeads = async () => {
     try {
       const response = await api.get('/leads/');
@@ -122,6 +129,23 @@ const Management = () => {
       fetchLeads();
     } catch (err) {
       console.error(err);
+    }
+  };
+
+  const handleAddNote = async (e) => {
+    e.preventDefault();
+    if (!noteContent.trim()) return;
+    setSubmittingNote(true);
+    try {
+      await api.post(`/leads/${noteModal.leadId}/notes/`, { content: noteContent });
+      setNoteContent('');
+      setNoteModal({ open: false, leadId: null, leadName: '' });
+      alert('Intelligence entry recorded successfully.');
+    } catch (err) {
+      console.error(err);
+      alert('Failed to record intelligence entry.');
+    } finally {
+      setSubmittingNote(false);
     }
   };
 
@@ -190,7 +214,7 @@ const Management = () => {
              <select 
                value={statusFilter}
                onChange={(e) => setStatusFilter(e.target.value)}
-               className="bg-transparent text-xs font-black text-white uppercase tracking-[0.2em] outline-none pr-8 cursor-pointer"
+               className="bg-slate-900/50 text-xs font-black text-white uppercase tracking-[0.2em] outline-none pr-8 cursor-pointer border-none"
              >
                 <option value="All">All Pipelines</option>
                 <option value="New">New Stream</option>
@@ -305,6 +329,13 @@ const Management = () => {
                     <td className="px-6 py-8 text-right sticky right-0 bg-[#020617] z-10 border-l border-white/5">
                        <div className="flex items-center justify-end gap-2">
                           <button 
+                            onClick={() => setNoteModal({ open: true, leadId: lead.id, leadName: lead.name })}
+                            className="p-3 bg-white/5 hover:bg-emerald-500/20 text-slate-500 hover:text-emerald-400 rounded-xl transition-all border border-white/5 hover:border-emerald-500/20"
+                            title="Add Note"
+                          >
+                             <MessageSquare className="w-4.5 h-4.5" />
+                          </button>
+                          <button 
                             onClick={() => navigate(`/leads/${lead.id}`)}
                             className="p-3 bg-white/5 hover:bg-indigo-500/20 text-slate-500 hover:text-indigo-400 rounded-xl transition-all border border-white/5 hover:border-indigo-500/20"
                           >
@@ -341,6 +372,79 @@ const Management = () => {
           </div>
         )}
       </div>
+
+      {/* Quick Note Modal */}
+      <AnimatePresence>
+        {noteModal.open && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-6">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setNoteModal({ open: false, leadId: null, leadName: '' })}
+              className="absolute inset-0 bg-slate-950/80 backdrop-blur-md"
+            />
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative w-full max-w-lg bg-[#0f172a] border border-white/10 rounded-[2.5rem] p-10 shadow-3xl overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 p-10 opacity-[0.02] pointer-events-none">
+                <MessageSquare className="w-40 h-40 text-indigo-500" />
+              </div>
+
+              <div className="relative z-10">
+                <div className="flex justify-between items-start mb-8">
+                  <div>
+                    <div className="flex items-center gap-2 text-indigo-400 mb-2">
+                      <Zap className="w-4 h-4" />
+                      <span className="text-[10px] font-black uppercase tracking-[0.4em]">Intelligence Capture</span>
+                    </div>
+                    <h3 className="text-2xl font-black text-white tracking-tight">Add Lead Note</h3>
+                    <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mt-1">Prospect: {noteModal.leadName}</p>
+                  </div>
+                  <button 
+                    onClick={() => setNoteModal({ open: false, leadId: null, leadName: '' })}
+                    className="p-2 hover:bg-white/5 rounded-xl transition-colors text-slate-500 hover:text-white"
+                  >
+                    <XCircle className="w-6 h-6" />
+                  </button>
+                </div>
+
+                <form onSubmit={handleAddNote} className="space-y-6">
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Narrative Content</label>
+                    <textarea 
+                      autoFocus
+                      required
+                      value={noteContent}
+                      onChange={(e) => setNoteContent(e.target.value)}
+                      placeholder="Enter lead intelligence or meeting notes..."
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl p-6 text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500/40 transition-all min-h-[150px] resize-none placeholder:text-slate-700"
+                    />
+                  </div>
+                  
+                  <button 
+                    type="submit"
+                    disabled={submittingNote || !noteContent.trim()}
+                    className="w-full py-5 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-[1.5rem] font-black text-xs uppercase tracking-[0.3em] flex items-center justify-center gap-3 shadow-xl shadow-indigo-500/20 hover:shadow-indigo-500/40 disabled:opacity-50 transition-all active:scale-95"
+                  >
+                    {submittingNote ? (
+                      <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        Authorize Entry
+                      </>
+                    )}
+                  </button>
+                </form>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 };

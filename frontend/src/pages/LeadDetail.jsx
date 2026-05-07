@@ -36,8 +36,27 @@ const LeadDetail = () => {
         api.get(`/leads/${id}/`),
         api.get(`/leads/${id}/notes/`)
       ]);
+      const exampleNotes = [
+        { 
+          id: 'e-1', 
+          content: 'Initial discovery call completed. High interest in enterprise-level synchronization. Budget is approved for Q3 implementation.', 
+          created_by: 'Malsha Rathnayake', 
+          created_at: new Date(Date.now() - 86400000).toISOString() 
+        },
+        { 
+          id: 'e-2', 
+          content: 'Follow-up regarding API documentation. User was impressed with the neural scoring accuracy during the demo.', 
+          created_by: 'System Agent', 
+          created_at: new Date(Date.now() - 3600000).toISOString() 
+        }
+      ];
+
       setLead(leadRes.data);
-      setNotes(notesRes.data);
+      if (notesRes.data.length > 0) {
+        setNotes(notesRes.data);
+      } else {
+        setNotes(exampleNotes);
+      }
     } catch (err) {
       console.error(err);
       navigate('/leads');
@@ -228,34 +247,64 @@ const LeadDetail = () => {
                </div>
             </div>
 
-            <div className="flex-1 p-8 space-y-6 overflow-y-auto custom-scrollbar bg-slate-950/20">
+            <div className="flex-1 p-8 space-y-8 overflow-y-auto custom-scrollbar bg-slate-950/40">
               <AnimatePresence initial={false}>
                 {notes.map((note, idx) => (
                   <motion.div 
                     key={note.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: idx * 0.1 }}
-                    className="flex flex-col space-y-2 max-w-[85%]"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.05 }}
+                    className="relative pl-10 border-l-2 border-white/5 pb-2 last:pb-0"
                   >
-                    <div className="flex items-center gap-3 ml-2">
-                       <span className="text-[10px] font-black text-indigo-400 uppercase tracking-widest">{note.created_by || 'System Agent'}</span>
-                       <span className="text-[9px] text-slate-600 font-bold uppercase tracking-tighter">
-                          {new Date(note.created_at).toLocaleString(undefined, { hour: '2-digit', minute: '2-digit', month: 'short', day: 'numeric' })}
-                       </span>
-                    </div>
-                    <div className="p-5 bg-white/5 border border-white/5 rounded-[1.5rem] rounded-tl-none text-slate-200 leading-relaxed text-sm font-medium shadow-xl">
-                       {note.content}
+                    {/* Timeline Node */}
+                    <div className="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-indigo-500 border-4 border-[#020617] shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
+                    
+                    <div className="flex flex-col gap-3">
+                       <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                             <UserCircle className="w-3.5 h-3.5 text-indigo-400" />
+                             <span className="text-[11px] font-black text-white uppercase tracking-widest">{note.created_by || 'Unknown User'}</span>
+                          </div>
+                          <div className="flex items-center gap-3 text-slate-400">
+                             <div className="flex items-center gap-1.5 px-2 py-1 bg-white/5 rounded-lg border border-white/5">
+                                <Calendar className="w-3 h-3 text-indigo-400" />
+                                <span className="text-[10px] font-black uppercase tracking-wider text-slate-300">
+                                   {new Date(note.created_at).toLocaleDateString('en-US', { 
+                                     month: 'short', 
+                                     day: 'numeric', 
+                                     year: 'numeric'
+                                   })}
+                                </span>
+                             </div>
+                             <div className="flex items-center gap-1.5 px-2 py-1 bg-white/5 rounded-lg border border-white/5">
+                                <Clock className="w-3 h-3 text-indigo-400" />
+                                <span className="text-[10px] font-black uppercase tracking-wider text-slate-300">
+                                   {new Date(note.created_at).toLocaleTimeString('en-US', { 
+                                     hour: '2-digit', 
+                                     minute: '2-digit' 
+                                   })}
+                                </span>
+                             </div>
+                          </div>
+                       </div>
+                       
+                       <div className="p-6 bg-white/[0.03] border border-white/5 rounded-3xl rounded-tl-none text-slate-300 leading-relaxed text-sm font-medium shadow-2xl hover:bg-white/[0.05] transition-colors">
+                          {note.content}
+                       </div>
                     </div>
                   </motion.div>
                 ))}
                 
                 {notes.length === 0 && (
-                  <div className="flex flex-col items-center justify-center h-full opacity-30 gap-4">
-                     <div className="p-6 bg-white/5 rounded-full border border-white/5">
-                        <MessageSquare className="w-12 h-12 text-slate-500" />
+                  <div className="flex flex-col items-center justify-center h-full opacity-20 gap-6">
+                     <div className="p-8 bg-white/5 rounded-full border border-white/10 shadow-inner">
+                        <MessageSquare className="w-16 h-16 text-slate-400" />
                      </div>
-                     <p className="text-slate-500 font-black uppercase tracking-widest text-xs">No entries found in timeline.</p>
+                     <div className="text-center">
+                        <h4 className="text-xl font-black text-white uppercase tracking-[0.2em] mb-2">Narrative Empty</h4>
+                        <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">No intelligence briefs have been recorded yet.</p>
+                     </div>
                   </div>
                 )}
               </AnimatePresence>
