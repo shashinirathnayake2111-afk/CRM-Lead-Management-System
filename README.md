@@ -1,66 +1,140 @@
-# Uplift CRM
+# 🚀 Uplift CRM: Executive Intelligence Command Center
 
-A modern, full-stack CRM Lead Management System built with Django, React, and MongoDB.
+**Uplift CRM** is a high-fidelity, production-grade Lead Management System designed with a "Cyber-Luxury" aesthetic. It transforms traditional CRM workflows into a streamlined, intelligence-driven experience, empowering Relationship Managers to capture deep insights and Executive Admins to orchestrate high-level pipeline operations with absolute precision.
 
-## Features
-- **Dashboard**: Visual summary of sales pipeline and lead statistics.
-- **Lead Management**: Complete CRUD functionality for managing sales leads.
-- **Lead Notes**: Track follow-up activities and internal notes for each lead.
-- **Premium UI**: Glassmorphism aesthetic with dark mode and smooth animations.
-- **Secure Auth**: JWT-based authentication system.
+---
 
-## Tech Stack
-- **Frontend**: React (Vite), Tailwind CSS, Framer Motion, Lucide React, Axios.
-- **Backend**: Django, Django Rest Framework, SimpleJWT.
-- **Database**: MongoDB (via pymongo).
+## 🛠️ Technology Stack
 
-## Getting Started
+### **Frontend (The Command UI)**
+*   **Core**: [React 18](https://reactjs.org/) + [Vite](https://vitejs.dev/) (Ultra-fast HMR)
+*   **Styling**: [Tailwind CSS](https://tailwindcss.com/) (Custom Design Tokens)
+*   **Animations**: [Framer Motion](https://www.framer.com/motion/) (Fluid transitions & glassmorphism effects)
+*   **Icons**: [Lucide React](https://lucide.dev/) (High-precision stroke icons)
+*   **Visualizations**: [Chart.js](https://www.chartjs.org/) (Executive Dashboard metrics)
 
-### Prerequisites
-- Python 3.10+
-- Node.js & npm
-- MongoDB (running locally on `mongodb://localhost:27017`)
+### **Backend (The Intelligence Engine)**
+*   **Framework**: [Django 5.0](https://www.djangoproject.com/)
+*   **API Layer**: [Django REST Framework (DRF)](https://www.django-rest-framework.org/)
+*   **Security**: [SimpleJWT](https://django-rest-framework-simplejwt.readthedocs.io/) (Stateless JWT Authentication)
+*   **Database**: [PostgreSQL](https://www.postgresql.org/) (Production) / [SQLite](https://www.sqlite.org/) (Local Dev)
+*   **Environment**: [Python 3.10+](https://www.python.org/)
 
-### 1. Backend Setup
-1. Navigate to the `backend` directory:
-   ```bash
-   cd backend
-   ```
-2. Activate the virtual environment:
-   ```bash
-   # Windows
-   venv\Scripts\activate
-   # macOS/Linux
-   source venv/bin/activate
-   ```
-3. (Already done during setup) Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-4. Run migrations and start the server:
-   ```bash
-   python manage.py migrate
-   python manage.py runserver
-   ```
+---
 
-### 2. Frontend Setup
-1. Navigate to the `frontend` directory:
-   ```bash
-   cd frontend
-   ```
-2. (Already done during setup) Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
+## ✨ Features Implemented
 
-### 3. Login
-Use the following test credentials:
-- **Email**: `admin@example.com`
-- **Password**: `password123`
+### 🛡️ **Executive Role-Based Access Control (RBAC)**
+*   **Relationship Managers**: Full access to the "Opportunity Stream" and "Detailed Intelligence" narratives. Can edit profiles and capture notes.
+*   **Executive Admins**: Exclusive access to the "Management Console" and "Termination" (Delete) capabilities.
 
-## Screenshots
-(Coming soon)
+### 📊 **Executive Dashboard**
+*   High-level visualization of Total Revenue, Pipeline Velocity, and Status Distribution.
+*   Intelligence-driven summaries of the most recent high-value leads.
+
+### 🌊 **Opportunity Stream (Lead List)**
+*   Glass-premium interface for tracking leads.
+*   Real-time status badges and revenue projections.
+*   Inline "Intelligence Briefing" quick-access notes.
+
+### 🧠 **Detailed Intelligence (Timeline Narrative)**
+*   A chronological audit trail of all client interactions.
+*   **Macro-Scale Inline Editing**: Relationship Managers can refine intelligence entries directly within the timeline.
+*   Permanently docked refinement tools for rapid data entry.
+
+### 🏛️ **Management Console**
+*   A centralized administrative suite for financial auditing and lead cleanup.
+*   Localized currency support for Sri Lankan Rupees (**Rs.**).
+
+---
+
+## 🚀 How to Run Locally
+
+### **1. Prerequisites**
+*   Python 3.10+
+*   Node.js 18+
+*   Git
+
+### **2. Backend Setup**
+```bash
+# Navigate to backend
+cd backend
+
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run migrations
+python manage.py migrate
+
+# Start server
+python manage.py runserver
+```
+
+### **3. Frontend Setup**
+```bash
+# Navigate to frontend
+cd frontend
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+---
+
+## 🔐 Environment Variables
+
+### **Backend (`backend/.env`)**
+```env
+DEBUG=True
+SECRET_KEY=your-secret-key-here
+DB_NAME=uplift_crm
+DB_USER=postgres
+DB_PASSWORD=yourpassword
+DB_HOST=localhost
+DB_PORT=5432
+```
+
+### **Frontend (`frontend/.env`)**
+```env
+VITE_API_URL=http://localhost:8000/api
+```
+
+---
+
+## 👤 Test Login Credentials
+
+| Role | Username | Password | Access Level |
+| :--- | :--- | :--- | :--- |
+| **Executive Admin** | `admin` | `admin123` | Full System Control |
+| **Sales Manager** | `testuser` | `password123` | Operational Access (No Delete) |
+
+---
+
+## 📂 Database Setup
+The system uses Django's ORM to manage the following models:
+1.  **Lead**: Core entity containing contact info, status, and `deal_value`.
+2.  **Note**: Intelligence entries linked to leads, tracking `created_by` and `content`.
+3.  **User**: Standard Django auth user extended via JWT payload for role identification.
+
+---
+
+## ⚠️ Known Limitations
+*   **Kanban View**: The visual pipeline board is currently in the design phase and will be integrated in a future update.
+*   **Real-time Notifications**: Currently utilizes manual refresh for data synchronization.
+*   **Bulk Export**: CSV export of lead data is currently pending implementation in the Management Console.
+
+---
+
+## 🧠 Reflection
+Building **Uplift CRM** focused on the intersection of **Security** and **User Experience**. The primary challenge was ensuring that the "Detailed Intelligence" page remained ultra-responsive while handling complex nested state updates for inline editing. By leveraging **Tailwind's glassmorphism** and **Django's RESTful generics**, we created a tool that feels more like a premium software product than a standard internal business app.
+
+---
+
+*Designed & Engineered for Uplift Operations.*
