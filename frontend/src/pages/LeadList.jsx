@@ -300,7 +300,7 @@ const LeadList = () => {
                       </td>
                       <td className="px-8 py-8 text-right">
                         <div className="flex flex-col items-end">
-                           <span className="text-emerald-400 font-black tracking-tighter text-2xl">${(lead.deal_value || 0).toLocaleString()}</span>
+                           <span className="text-emerald-400 font-black text-2xl tracking-tighter">Rs. {(lead.deal_value || 0).toLocaleString()}</span>
                            <span className="text-[10px] text-slate-600 uppercase font-black tracking-[0.3em] mt-1">Est. Projection</span>
                         </div>
                       </td>

@@ -217,7 +217,7 @@ const LeadForm = () => {
 
             {/* Deal Value */}
             <div className="space-y-2">
-              <label className={labelClass}>Estimated Valuation ($)</label>
+              <label className={labelClass}>Estimated Valuation (Rs.)</label>
               <div className="relative group">
                 <DollarSign className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500 group-focus-within:text-indigo-400 transition-colors" />
                 <input 

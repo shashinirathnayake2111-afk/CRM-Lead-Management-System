@@ -306,8 +306,8 @@ const Dashboard = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <StatCard title="Churn rate" value={stats?.lostLeads} icon={Activity} color="red" />
-            <StatCard title="Projected" value={`$${(stats?.totalEstimatedValue || 0).toLocaleString()}`} icon={DollarSign} color="sky" />
-            <StatCard title="Actualized" value={`$${(stats?.totalWonValue || 0).toLocaleString()}`} icon={Trophy} color="emerald" />
+            <StatCard title="Projected" value={`Rs. ${(stats?.totalEstimatedValue || 0).toLocaleString()}`} icon={DollarSign} color="sky" />
+            <StatCard title="Actualized" value={`Rs. ${(stats?.totalWonValue || 0).toLocaleString()}`} icon={Trophy} color="emerald" />
           </div>
 
           {/* Table Section */}

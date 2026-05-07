@@ -175,7 +175,7 @@ const LeadDetail = () => {
               <div className="p-4 bg-white/5 rounded-2xl border border-white/5">
                 <span className="text-[10px] text-slate-500 uppercase font-black tracking-widest">Projected Revenue</span>
                 <div className="mt-1 text-emerald-400 font-black text-3xl tracking-tighter">
-                   ${lead.deal_value?.toLocaleString()}
+                   Rs. {lead.deal_value?.toLocaleString()}
                 </div>
               </div>
 
