@@ -60,6 +60,11 @@ class NoteListCreateView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class NoteDetailView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated]
+    queryset = Note.objects.all()
+    serializer_class = NoteSerializer
+
 class DashboardStatsView(APIView):
     permission_classes = [IsAuthenticated]
 

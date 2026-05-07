@@ -57,7 +57,7 @@ const Management = () => {
       source: 'LinkedIn',
       assigned_to_name: 'Alex Thompson',
       status: 'Qualified',
-      estimated_value: 1500000,
+      deal_value: 1500000,
       created_at: new Date(Date.now() - 86400000 * 5).toISOString(),
       updated_at: new Date().toISOString()
     },
@@ -70,7 +70,7 @@ const Management = () => {
       source: 'Referral',
       assigned_to_name: 'Sarah Chen',
       status: 'Proposal Sent',
-      estimated_value: 2800000,
+      deal_value: 2800000,
       created_at: new Date(Date.now() - 86400000 * 12).toISOString(),
       updated_at: new Date(Date.now() - 86400000 * 2).toISOString()
     },
@@ -83,7 +83,7 @@ const Management = () => {
       source: 'Web Inquiry',
       assigned_to_name: 'Marcus Miller',
       status: 'New',
-      estimated_value: 500000,
+      deal_value: 500000,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString()
     }
@@ -300,8 +300,8 @@ const Management = () => {
                     </td>
                     <td className="px-6 py-8">
                        <div className="flex items-baseline gap-1 text-emerald-400 font-black text-lg tracking-tighter">
-                          <DollarSign className="w-4 h-4 text-emerald-500/50" />
-                          <span>{(lead.estimated_value || 0).toLocaleString()}</span>
+                          <span className="mr-1">Rs.</span>
+                          <span>{(lead.deal_value || 0).toLocaleString()}</span>
                        </div>
                     </td>
                     <td className="px-6 py-8">

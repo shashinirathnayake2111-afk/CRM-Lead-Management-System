@@ -28,6 +28,8 @@ const LeadDetail = () => {
   const [lead, setLead] = useState(null);
   const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState('');
+  const [editingNoteId, setEditingNoteId] = useState(null);
+  const [editContent, setEditContent] = useState('');
   const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
@@ -36,27 +38,8 @@ const LeadDetail = () => {
         api.get(`/leads/${id}/`),
         api.get(`/leads/${id}/notes/`)
       ]);
-      const exampleNotes = [
-        { 
-          id: 'e-1', 
-          content: 'Initial discovery call completed. Discussed project scope and budget requirements.', 
-          created_by: 'Malsha Rathnayake', 
-          created_at: new Date(Date.now() - 86400000).toISOString() 
-        },
-        { 
-          id: 'e-2', 
-          content: 'Sent technical proposal via email. Customer requested a follow-up meeting next Tuesday.', 
-          created_by: 'Account Manager', 
-          created_at: new Date(Date.now() - 3600000).toISOString() 
-        }
-      ];
-
       setLead(leadRes.data);
-      if (notesRes.data.length > 0) {
-        setNotes(notesRes.data);
-      } else {
-        setNotes(exampleNotes);
-      }
+      setNotes(notesRes.data);
     } catch (err) {
       console.error(err);
       navigate('/leads');
@@ -78,6 +61,38 @@ const LeadDetail = () => {
       fetchData();
     } catch (err) {
       console.error(err);
+    }
+  };
+
+  const handleStartEdit = (note) => {
+    setEditingNoteId(note.id);
+    setEditContent(note.content);
+  };
+
+  const handleUpdateNote = async (noteId) => {
+    if (!editContent.trim()) return;
+    try {
+      await api.put(`/notes/${noteId}/`, { content: editContent });
+      setEditingNoteId(null);
+      fetchData();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setEditingNoteId(null);
+    setEditContent('');
+  };
+
+  const handleDeleteNote = async (noteId) => {
+    if (window.confirm('Delete this intelligence entry?')) {
+      try {
+        await api.delete(`/notes/${noteId}/`);
+        fetchData();
+      } catch (err) {
+        console.error(err);
+      }
     }
   };
 
@@ -137,13 +152,16 @@ const LeadDetail = () => {
             <Edit className="w-4 h-4" />
             Edit Profile
           </Link>
-          <button 
-            onClick={handleDelete}
-            className="flex-1 lg:flex-none px-8 py-4 bg-rose-500/5 hover:bg-rose-500/10 text-rose-400 rounded-2xl font-black transition-all flex items-center justify-center gap-3 border border-rose-500/10 hover:border-rose-500/20 uppercase tracking-widest text-xs"
-          >
-            <Trash2 className="w-4 h-4" />
-            Terminate
-          </button>
+          
+          {user?.isAdmin && (
+            <button 
+              onClick={handleDelete}
+              className="flex-1 lg:flex-none px-8 py-4 bg-rose-500/5 hover:bg-rose-500/10 text-rose-400 rounded-2xl font-black transition-all flex items-center justify-center gap-3 border border-rose-500/10 hover:border-rose-500/20 uppercase tracking-widest text-xs"
+            >
+              <Trash2 className="w-4 h-4" />
+              Terminate
+            </button>
+          )}
         </div>
       </div>
 
@@ -260,38 +278,63 @@ const LeadDetail = () => {
                     {/* Timeline Node */}
                     <div className="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-indigo-500 border-4 border-[#020617] shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
                     
-                    <div className="flex flex-col gap-3">
+                    <div className="flex flex-col gap-3 group/note">
                        <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
                              <UserCircle className="w-3.5 h-3.5 text-indigo-400" />
                              <span className="text-[11px] font-black text-white uppercase tracking-widest">{note.created_by || 'Unknown User'}</span>
                           </div>
-                          <div className="flex items-center gap-3 text-slate-400">
-                             <div className="flex items-center gap-1.5 px-2 py-1 bg-white/5 rounded-lg border border-white/5">
-                                <Calendar className="w-3 h-3 text-indigo-400" />
-                                <span className="text-[10px] font-black uppercase tracking-wider text-slate-300">
-                                   {new Date(note.created_at).toLocaleDateString('en-US', { 
-                                     month: 'short', 
-                                     day: 'numeric', 
-                                     year: 'numeric'
-                                   })}
-                                </span>
+                          <div className="flex items-center gap-3">
+                             <div className="flex items-center gap-2 opacity-0 group-hover/note:opacity-100 transition-opacity">
+                                <button 
+                                  onClick={() => handleStartEdit(note)}
+                                  className="p-1.5 bg-white/5 hover:bg-indigo-500/20 text-slate-400 hover:text-indigo-400 rounded-lg border border-white/5 transition-all"
+                                >
+                                   <Edit className="w-3 h-3" />
+                                </button>
+                                <button 
+                                  onClick={() => handleDeleteNote(note.id)}
+                                  className="p-1.5 bg-white/5 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 rounded-lg border border-white/5 transition-all"
+                                >
+                                   <Trash2 className="w-3 h-3" />
+                                </button>
                              </div>
-                             <div className="flex items-center gap-1.5 px-2 py-1 bg-white/5 rounded-lg border border-white/5">
+                             <div className="flex items-center gap-1.5 px-2 py-1 bg-white/5 rounded-lg border border-white/5 text-slate-400">
                                 <Clock className="w-3 h-3 text-indigo-400" />
                                 <span className="text-[10px] font-black uppercase tracking-wider text-slate-300">
-                                   {new Date(note.created_at).toLocaleTimeString('en-US', { 
-                                     hour: '2-digit', 
-                                     minute: '2-digit' 
-                                   })}
+                                   {new Date(note.created_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
                                 </span>
                              </div>
                           </div>
                        </div>
                        
-                       <div className="p-6 bg-white/[0.03] border border-white/5 rounded-3xl rounded-tl-none text-slate-300 leading-relaxed text-sm font-medium shadow-2xl hover:bg-white/[0.05] transition-colors">
-                          {note.content}
-                       </div>
+                       {editingNoteId === note.id ? (
+                         <div className="space-y-4">
+                            <textarea 
+                              className="w-full bg-slate-900 border border-indigo-500/30 text-white p-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 text-sm font-medium resize-none h-24"
+                              value={editContent}
+                              onChange={(e) => setEditContent(e.target.value)}
+                            />
+                            <div className="flex gap-2 justify-end">
+                               <button 
+                                 onClick={handleCancelEdit}
+                                 className="px-4 py-2 text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-white transition-colors"
+                               >
+                                 Cancel
+                               </button>
+                               <button 
+                                 onClick={() => handleUpdateNote(note.id)}
+                                 className="px-6 py-2 bg-indigo-500 text-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-indigo-500/20 hover:bg-indigo-600 transition-all"
+                               >
+                                 Save Changes
+                               </button>
+                            </div>
+                         </div>
+                       ) : (
+                         <div className="p-6 bg-white/[0.03] border border-white/5 rounded-3xl rounded-tl-none text-slate-300 leading-relaxed text-sm font-medium shadow-2xl hover:bg-white/[0.05] transition-colors">
+                            {note.content}
+                         </div>
+                       )}
                     </div>
                   </motion.div>
                 ))}
