@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Lock, User, Loader2, Eye, EyeOff, CheckCircle2 } from 'lucide-react';
+import { Lock, User, Loader2, Eye, EyeOff, CheckCircle2, ShieldCheck } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Login = () => {
@@ -27,6 +27,7 @@ const Login = () => {
       setLoading(false);
     }
   };
+
 
   return (
     <div className="min-h-screen flex bg-[#0b0f1a]">
@@ -165,6 +166,23 @@ const Login = () => {
                 </>
               )}
             </button>
+
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-slate-800"></div>
+              </div>
+              <div className="relative flex justify-center text-xs uppercase tracking-[0.3em] font-black">
+                <span className="bg-[#0b0f1a] px-4 text-slate-600">Access Control</span>
+              </div>
+            </div>
+
+            <Link
+              to="/admin-login"
+              className="w-full bg-white/[0.03] hover:bg-indigo-500/10 border border-white/5 hover:border-indigo-500/20 text-slate-400 hover:text-indigo-400 font-black py-4 rounded-2xl transition-all flex items-center justify-center gap-4 group text-xs uppercase tracking-widest"
+            >
+              <ShieldCheck className="w-5 h-5 text-indigo-500 group-hover:scale-110 transition-transform" />
+              Switch to Executive Terminal
+            </Link>
           </form>
 
           <div className="mt-10 text-center">

@@ -294,10 +294,10 @@ const LeadList = () => {
                               e.stopPropagation();
                               setNoteModal({ open: true, leadId: lead.id, leadName: lead.name });
                             }}
-                            title="Intelligence Entry"
+                            title="Lead Note"
                             className="p-4 bg-white/5 hover:bg-emerald-500/20 text-slate-500 hover:text-emerald-400 rounded-2xl transition-all border border-white/10 hover:border-emerald-500/20"
                           >
-                             <Zap className="w-5 h-5" />
+                             <MessageSquare className="w-5 h-5" />
                           </button>
                           
                           <div className="flex items-center gap-2">
@@ -374,10 +374,10 @@ const LeadList = () => {
                 <div className="flex justify-between items-start mb-8">
                   <div>
                     <div className="flex items-center gap-2 text-indigo-400 mb-2">
-                      <Zap className="w-4 h-4" />
-                      <span className="text-[10px] font-black uppercase tracking-[0.4em]">Intelligence Capture</span>
+                      <MessageSquare className="w-4 h-4" />
+                      <span className="text-[10px] font-black uppercase tracking-[0.4em]">Narrative Entry</span>
                     </div>
-                    <h3 className="text-2xl font-black text-white tracking-tight">Add Lead Note</h3>
+                    <h3 className="text-2xl font-black text-white tracking-tight">Lead Note</h3>
                     <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mt-1">Prospect: {noteModal.leadName}</p>
                   </div>
                   <button 
@@ -396,7 +396,7 @@ const LeadList = () => {
                       required
                       value={noteContent}
                       onChange={(e) => setNoteContent(e.target.value)}
-                      placeholder="Enter lead intelligence or meeting notes..."
+                      placeholder="Capture meeting minutes or interaction details..."
                       className="w-full bg-white/5 border border-white/10 rounded-2xl p-6 text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500/40 transition-all min-h-[150px] resize-none placeholder:text-slate-700"
                     />
                   </div>

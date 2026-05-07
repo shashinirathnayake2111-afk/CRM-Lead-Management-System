@@ -9,6 +9,7 @@ import LeadForm from './pages/LeadForm';
 import LeadDetail from './pages/LeadDetail';
 import Management from './pages/Management';
 import Signup from './pages/Signup';
+import AdminLogin from './pages/AdminLogin';
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -40,6 +41,7 @@ function App() {
         <Routes>
           <Route path="/auth" element={<LandingRedirect />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/admin-login" element={<AdminLogin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
           <Route path="/leads" element={<PrivateRoute><LeadList /></PrivateRoute>} />

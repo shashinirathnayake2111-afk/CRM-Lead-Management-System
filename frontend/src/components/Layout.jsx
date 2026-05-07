@@ -30,7 +30,7 @@ const Layout = ({ children }) => {
   const menuItems = [
     { name: 'Dashboard', icon: LayoutDashboard, path: '/' },
     { name: 'Leads', icon: Users, path: '/leads' },
-    { name: 'Management', icon: ShieldCheck, path: '/management' },
+    ...(user?.isAdmin ? [{ name: 'Management', icon: ShieldCheck, path: '/management' }] : []),
   ];
 
   return (
@@ -104,7 +104,9 @@ const Layout = ({ children }) => {
              {isSidebarOpen && (
                <div className="flex-1 min-w-0">
                   <p className="text-xs font-black text-white truncate">{user?.email?.split('@')[0]}</p>
-                  <p className="text-[9px] font-black text-indigo-400 uppercase tracking-widest">Lead Agent</p>
+                  <p className="text-[9px] font-black text-indigo-400 uppercase tracking-widest">
+                    {user?.isAdmin ? 'Executive Admin' : 'Lead Agent'}
+                  </p>
                </div>
              )}
           </div>

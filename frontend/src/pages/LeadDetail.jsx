@@ -39,14 +39,14 @@ const LeadDetail = () => {
       const exampleNotes = [
         { 
           id: 'e-1', 
-          content: 'Initial discovery call completed. High interest in enterprise-level synchronization. Budget is approved for Q3 implementation.', 
+          content: 'Initial discovery call completed. Discussed project scope and budget requirements.', 
           created_by: 'Malsha Rathnayake', 
           created_at: new Date(Date.now() - 86400000).toISOString() 
         },
         { 
           id: 'e-2', 
-          content: 'Follow-up regarding API documentation. User was impressed with the neural scoring accuracy during the demo.', 
-          created_by: 'System Agent', 
+          content: 'Sent technical proposal via email. Customer requested a follow-up meeting next Tuesday.', 
+          created_by: 'Account Manager', 
           created_at: new Date(Date.now() - 3600000).toISOString() 
         }
       ];
