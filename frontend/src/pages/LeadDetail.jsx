@@ -32,6 +32,7 @@ const LeadDetail = () => {
   const [newNote, setNewNote] = useState('');
   const [editingNoteId, setEditingNoteId] = useState(null);
   const [editContent, setEditContent] = useState('');
+  const [submittingNote, setSubmittingNote] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
@@ -66,19 +67,28 @@ const LeadDetail = () => {
     }
   };
 
-  const handleStartEdit = (note) => {
+  const handleStartEdit = (e, note) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    console.log('Starting edit for note:', note.id);
     setEditingNoteId(note.id);
     setEditContent(note.content);
   };
 
   const handleUpdateNote = async (noteId) => {
     if (!editContent.trim()) return;
+    setSubmittingNote(true);
     try {
-      await api.put(`/notes/${noteId}/`, { content: editContent });
+      await api.patch(`/notes/${noteId}/`, { content: editContent });
       setEditingNoteId(null);
       fetchData();
     } catch (err) {
       console.error(err);
+      alert('Failed to update intelligence entry.');
+    } finally {
+      setSubmittingNote(false);
     }
   };
 
@@ -270,61 +280,66 @@ const LeadDetail = () => {
                     {/* Timeline Node */}
                     <div className="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-indigo-500 border-4 border-[#020617] shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
                     
-                    <div className="flex flex-col gap-3 group/note">
+                    <div className="flex flex-col gap-4 group relative">
                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                             <UserCircle className="w-3.5 h-3.5 text-indigo-400" />
-                             <span className="text-[11px] font-black text-white uppercase tracking-widest">{note.created_by || 'Unknown User'}</span>
-                          </div>
                           <div className="flex items-center gap-3">
-                             <div className="flex items-center gap-2 opacity-0 group-hover/note:opacity-100 transition-opacity">
-                                <button 
-                                  onClick={() => handleStartEdit(note)}
-                                  className="p-1.5 bg-white/5 hover:bg-indigo-500/20 text-slate-400 hover:text-indigo-400 rounded-lg border border-white/5 transition-all"
-                                >
-                                   <Edit className="w-3 h-3" />
-                                </button>
-                                <button 
-                                  onClick={() => handleDeleteNote(note.id)}
-                                  className="p-1.5 bg-white/5 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 rounded-lg border border-white/5 transition-all"
-                                >
-                                   <Trash2 className="w-3 h-3" />
-                                </button>
+                             <div className="p-2 bg-indigo-500/10 rounded-xl border border-indigo-500/20">
+                                <UserCircle className="w-5 h-5 text-indigo-400" />
                              </div>
-                             <div className="flex items-center gap-1.5 px-2 py-1 bg-white/5 rounded-lg border border-white/5 text-slate-400">
-                                <Clock className="w-3 h-3 text-indigo-400" />
-                                <span className="text-[10px] font-black uppercase tracking-wider text-slate-300">
-                                   {new Date(note.created_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
-                                </span>
+                             <div className="flex flex-col">
+                                <span className="text-[11px] font-black text-white uppercase tracking-widest">{note.created_by || 'Unknown User'}</span>
+                                <div className="flex items-center gap-1.5 text-slate-500">
+                                   <Clock className="w-3 h-3 text-indigo-400/50" />
+                                   <span className="text-[9px] font-bold uppercase tracking-wider">
+                                      {new Date(note.created_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
+                                   </span>
+                                </div>
                              </div>
                           </div>
                        </div>
                        
-                       {editingNoteId === note.id ? (
+                       {String(editingNoteId) === String(note.id) ? (
                          <div className="space-y-4">
                             <textarea 
-                              className="w-full bg-slate-900 border border-indigo-500/30 text-white p-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 text-sm font-medium resize-none h-24"
+                              className="w-full bg-slate-900 border border-indigo-500/30 text-white p-6 rounded-[2rem] focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500/40 text-base font-medium resize-none h-40 shadow-inner custom-scrollbar"
                               value={editContent}
                               onChange={(e) => setEditContent(e.target.value)}
                             />
-                            <div className="flex gap-2 justify-end">
+                            <div className="flex gap-4 justify-end pt-2">
                                <button 
+                                 type="button"
                                  onClick={handleCancelEdit}
-                                 className="px-4 py-2 text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-white transition-colors"
+                                 className="px-6 py-3 text-xs font-black uppercase tracking-widest text-slate-500 hover:text-white transition-colors cursor-pointer"
                                >
                                  Cancel
                                </button>
                                <button 
-                                 onClick={() => handleUpdateNote(note.id)}
-                                 className="px-6 py-2 bg-indigo-500 text-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-indigo-500/20 hover:bg-indigo-600 transition-all"
+                                 type="button"
+                                 disabled={submittingNote}
+                                 onClick={(e) => {
+                                   e.preventDefault();
+                                   e.stopPropagation();
+                                   handleUpdateNote(note.id);
+                                 }}
+                                 className="relative z-[100] px-10 py-4 bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-2xl text-xs font-black uppercase tracking-widest shadow-xl shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-0.5 transition-all active:scale-95 cursor-pointer disabled:opacity-50"
                                >
-                                 Save Changes
+                                 {submittingNote ? 'Saving...' : 'Authorize Save'}
                                </button>
                             </div>
                          </div>
                        ) : (
-                         <div className="p-6 bg-white/[0.03] border border-white/5 rounded-3xl rounded-tl-none text-slate-300 leading-relaxed text-sm font-medium shadow-2xl hover:bg-white/[0.05] transition-colors">
-                            {note.content}
+                         <div className="relative group">
+                            <div className="p-8 bg-white/[0.03] border border-white/5 rounded-[2rem] rounded-tl-none text-slate-300 leading-relaxed text-base font-medium shadow-2xl hover:bg-white/[0.05] transition-colors">
+                               {note.content}
+                            </div>
+                            
+                            <button 
+                              onClick={(e) => handleStartEdit(e, note)}
+                              className="absolute top-4 right-4 z-50 p-3 bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-400 rounded-xl border border-indigo-500/20 transition-all shadow-lg shadow-indigo-500/10 cursor-pointer"
+                              title="Refine Intelligence"
+                            >
+                               <Edit className="w-6 h-6" />
+                            </button>
                          </div>
                        )}
                     </div>
