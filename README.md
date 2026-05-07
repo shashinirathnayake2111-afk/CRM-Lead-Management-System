@@ -117,23 +117,33 @@ VITE_API_URL=http://localhost:8000/api
 
 ---
 
+---
+
+## 🎥 Demo Video
+> [!IMPORTANT]
+> [Click here to watch the Uplift CRM Demo Video](PASTE_YOUR_LINK_HERE)
+> *The video demonstrates the complete lifecycle: Authentication -> Dashboard Navigation -> Opportunity Stream Management -> Detailed Intelligence Narratives.*
+
+---
+
 ## 📂 Database Setup
 The system uses Django's ORM to manage the following models:
 1.  **Lead**: Core entity containing contact info, status, and `deal_value`.
 2.  **Note**: Intelligence entries linked to leads, tracking `created_by` and `content`.
 3.  **User**: Standard Django auth user extended via JWT payload for role identification.
 
----
-
-## ⚠️ Known Limitations
-*   **Kanban View**: The visual pipeline board is currently in the design phase and will be integrated in a future update.
-*   **Real-time Notifications**: Currently utilizes manual refresh for data synchronization.
-*   **Bulk Export**: CSV export of lead data is currently pending implementation in the Management Console.
+### **Setup Instructions:**
+1. Run `python manage.py makemigrations leads`
+2. Run `python manage.py migrate`
 
 ---
 
-## 🧠 Reflection
-Building **Uplift CRM** focused on the intersection of **Security** and **User Experience**. The primary challenge was ensuring that the "Detailed Intelligence" page remained ultra-responsive while handling complex nested state updates for inline editing. By leveraging **Tailwind's glassmorphism** and **Django's RESTful generics**, we created a tool that feels more like a premium software product than a standard internal business app.
+## 🧠 Reflection & Technical Journey
+Developing **Uplift CRM** was an exercise in balancing **Cyber-Luxury aesthetics** with **High-Availability operational logic**. 
+
+*   **Design Philosophy**: We moved away from standard "flat" CRM designs to a "Glass-Premium" look using Tailwind CSS. This ensures that Relationship Managers feel they are using a modern, high-tech tool, which increases engagement.
+*   **Security Architecture**: A key challenge was implementing granular Role-Based Access Control (RBAC). We ensured that while data is accessible for collaboration, destructive actions (termination) are strictly gated behind Administrative roles.
+*   **Performance Optimization**: To handle the "Detailed Intelligence" timeline efficiently, we implemented a custom state management system in React that allows for high-fidelity inline editing without full page reloads, significantly reducing latency for the end-user.
 
 ---
 
