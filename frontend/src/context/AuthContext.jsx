@@ -42,16 +42,17 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('userEmail', email);
     const isAdmin = response.data.is_staff === true || response.data.is_staff === 'true';
     localStorage.setItem('isAdmin', isAdmin ? 'true' : 'false');
-    setUser({ email, isAdmin: isAdmin });
+    const userData = { email, isAdmin: isAdmin };
+    setUser(userData);
     return response.data;
   };
 
   const adminLogin = async (username, password) => {
     // Specialized method for the Admin Portal
     const response = await login(username, password);
-    // Explicitly force admin state if the login was successful
+    // Explicitly force admin state and ensure user is set
     localStorage.setItem('isAdmin', 'true');
-    setUser(prev => ({ ...prev, isAdmin: true }));
+    setUser({ email: username, isAdmin: true });
     return response;
   };
 

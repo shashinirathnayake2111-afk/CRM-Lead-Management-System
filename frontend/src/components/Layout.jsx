@@ -153,7 +153,7 @@ const Layout = ({ children }) => {
                 {isSidebarOpen && (
                   <div className="flex-1 min-w-0">
                      <p className="text-xs font-black text-white truncate group-hover/profile:text-indigo-300 transition-colors tracking-tight">
-                       {user?.email?.split('@')[0]}
+                      {user?.email ? user.email.split('@')[0] : 'Admin'}
                      </p>
                      <div className="flex items-center gap-1.5 mt-0.5">
                         <div className={`w-1 h-1 rounded-full ${user?.isAdmin ? 'bg-indigo-400' : 'bg-slate-500'}`} />
