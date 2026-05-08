@@ -12,7 +12,9 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 import os
+# pyrefly: ignore [missing-import]
 import dj_database_url
+# pyrefly: ignore [missing-import]
 from dotenv import load_dotenv
 
 # Load .env from project root
