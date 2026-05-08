@@ -1,0 +1,802 @@
+[
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$rruFvaGTbXPoubYgx0G3Li$VTZqoCoxBwu23+wDKwePTu49syjECJpk8+cKOKP4SrM=",
+        "last_login": null,
+        "is_superuser": true,
+        "username": "admin@example.com",
+        "first_name": "",
+        "last_name": "",
+        "email": "admin@example.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-05-06T14:21:02.487Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$yEE52OTtTrCPdid6v8H4Tc$gvfQAPj5gUUkjqESBzU5gZvElOAEBl1MPIg/1Qo+XW0=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "testuser3",
+        "first_name": "",
+        "last_name": "",
+        "email": "test3@example.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-05-06T21:16:42.029Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$JWQLhEq06cKfGZLRXBLFk5$pfGHvNlQ16GdNsyzbww/OW5Yp1t0Vrcoi56Vzh+oD6k=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "admin@rdb.lk",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-05-06T21:17:50.854Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$jn3HWkEIG7nxpAdCxeXw5B$n3MzDzBzwQ/gPXF3Km5GC4OpOmPzVG2PiFjd7CjSOtc=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "admin1",
+        "first_name": "",
+        "last_name": "",
+        "email": "admin@rdb.lk",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-05-06T21:22:50.857Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$IEUNZcgyj53vKZM1UdbhQM$jsePzgQ9NvoSaSNZl3wrZtXFa3iGFomuhW/h6ZviwCc=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "testuser",
+        "first_name": "",
+        "last_name": "",
+        "email": "test@example.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-05-06T21:34:42.833Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$ac0fTWrfnsseMbAkpFQIrJ$LoIn8eAuIRhzGJeENlSjY3j8uJpTsiDZgFcde9z6PEo=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "shashini",
+        "first_name": "",
+        "last_name": "",
+        "email": "shashini@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-05-07T15:41:33.631Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 1,
+    "fields": {
+        "name": "Angelo Mathews",
+        "email": "angelo.mathews@sampathbank.lk",
+        "phone": "0761100646",
+        "company": "Sampath Bank",
+        "status": "Qualified",
+        "source": "Facebook",
+        "salesperson": "Kamal Gunaratne",
+        "deal_value": "3130000.00",
+        "created_at": "2026-05-07T06:44:30.893Z",
+        "updated_at": "2026-05-07T06:44:30.893Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 2,
+    "fields": {
+        "name": "Kamindu Mendis",
+        "email": "kamindu.mendis@vallibelone.lk",
+        "phone": "0714205110",
+        "company": "Vallibel One",
+        "status": "Lost",
+        "source": "Email Campaign",
+        "salesperson": "Sunil Jayasundara",
+        "deal_value": "4935000.00",
+        "created_at": "2026-05-07T06:44:30.903Z",
+        "updated_at": "2026-05-07T06:44:30.903Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 3,
+    "fields": {
+        "name": "Dinesh Chandimal",
+        "email": "dinesh.chandimal@aitkenspence.lk",
+        "phone": "0702113386",
+        "company": "Aitken Spence",
+        "status": "Contacted",
+        "source": "Referral",
+        "salesperson": "Nimal Siriwardena",
+        "deal_value": "1225000.00",
+        "created_at": "2026-05-07T06:44:30.908Z",
+        "updated_at": "2026-05-07T06:44:30.908Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 5,
+    "fields": {
+        "name": "Binura Fernando",
+        "email": "binura.fernando@brandixlanka.lk",
+        "phone": "0744116762",
+        "company": "Brandix Lanka",
+        "status": "New",
+        "source": "Email Campaign",
+        "salesperson": "Amila Perera",
+        "deal_value": "3275000.00",
+        "created_at": "2026-05-07T06:44:30.919Z",
+        "updated_at": "2026-05-07T06:44:30.919Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 6,
+    "fields": {
+        "name": "Charith Asalanka",
+        "email": "charith.asalanka@expolankaholdings.lk",
+        "phone": "0749526866",
+        "company": "Expolanka Holdings",
+        "status": "Lost",
+        "source": "Email Campaign",
+        "salesperson": "Nimal Siriwardena",
+        "deal_value": "3690000.00",
+        "created_at": "2026-05-07T06:44:30.923Z",
+        "updated_at": "2026-05-07T06:44:30.923Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 7,
+    "fields": {
+        "name": "Dinesh Chandimal",
+        "email": "dinesh.chandimal@dialogaxiata.lk",
+        "phone": "0764160152",
+        "company": "Dialog Axiata",
+        "status": "Lost",
+        "source": "Facebook",
+        "salesperson": "Sunil Jayasundara",
+        "deal_value": "1715000.00",
+        "created_at": "2026-05-07T06:44:30.928Z",
+        "updated_at": "2026-05-07T06:44:30.928Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 8,
+    "fields": {
+        "name": "Dunith Wellalage",
+        "email": "dunith.wellalage@softlogicholdings.lk",
+        "phone": "0739755395",
+        "company": "Softlogic Holdings",
+        "status": "Won",
+        "source": "LinkedIn",
+        "salesperson": "Sunil Jayasundara",
+        "deal_value": "3680000.00",
+        "created_at": "2026-05-07T06:44:30.934Z",
+        "updated_at": "2026-05-07T06:44:30.934Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 9,
+    "fields": {
+        "name": "Kamindu Mendis",
+        "email": "kamindu.mendis@dfccbank.lk",
+        "phone": "0719044511",
+        "company": "DFCC Bank",
+        "status": "Proposal Sent",
+        "source": "Website",
+        "salesperson": "Kamal Gunaratne",
+        "deal_value": "555000.00",
+        "created_at": "2026-05-07T06:44:30.939Z",
+        "updated_at": "2026-05-07T06:44:30.939Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 10,
+    "fields": {
+        "name": "Kamindu Mendis",
+        "email": "kamindu.mendis@dfccbank.lk",
+        "phone": "0746611402",
+        "company": "DFCC Bank",
+        "status": "Contacted",
+        "source": "Referral",
+        "salesperson": "Kamal Gunaratne",
+        "deal_value": "2405000.00",
+        "created_at": "2026-05-07T06:44:30.944Z",
+        "updated_at": "2026-05-07T06:44:30.944Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 11,
+    "fields": {
+        "name": "Nuwan Kulasekara",
+        "email": "nuwan.kulasekara@expolankaholdings.lk",
+        "phone": "0701658847",
+        "company": "Expolanka Holdings",
+        "status": "Contacted",
+        "source": "Email Campaign",
+        "salesperson": "Amila Perera",
+        "deal_value": "1490000.00",
+        "created_at": "2026-05-07T06:44:30.948Z",
+        "updated_at": "2026-05-07T06:44:30.948Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 12,
+    "fields": {
+        "name": "Charith Asalanka",
+        "email": "charith.asalanka@masholdings.lk",
+        "phone": "0745270628",
+        "company": "MAS Holdings",
+        "status": "New",
+        "source": "Facebook",
+        "salesperson": "Amila Perera",
+        "deal_value": "4300000.00",
+        "created_at": "2026-05-07T06:44:30.954Z",
+        "updated_at": "2026-05-07T06:44:30.954Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 13,
+    "fields": {
+        "name": "Chamari Atapattu",
+        "email": "chamari.atapattu@masholdings.lk",
+        "phone": "0745478543",
+        "company": "MAS Holdings",
+        "status": "New",
+        "source": "Email Campaign",
+        "salesperson": "Amila Perera",
+        "deal_value": "1965000.00",
+        "created_at": "2026-05-07T06:44:30.959Z",
+        "updated_at": "2026-05-07T06:44:30.959Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 14,
+    "fields": {
+        "name": "Wanindu Hasaranga",
+        "email": "wanindu.hasaranga@softlogicholdings.lk",
+        "phone": "0786389516",
+        "company": "Softlogic Holdings",
+        "status": "Won",
+        "source": "Facebook",
+        "salesperson": "Kamal Gunaratne",
+        "deal_value": "1745000.00",
+        "created_at": "2026-05-07T06:44:30.964Z",
+        "updated_at": "2026-05-07T06:44:30.964Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 15,
+    "fields": {
+        "name": "Binura Fernando",
+        "email": "binura.fernando@dialogaxiata.lk",
+        "phone": "0713774410",
+        "company": "Dialog Axiata",
+        "status": "Proposal Sent",
+        "source": "Referral",
+        "salesperson": "Nimal Siriwardena",
+        "deal_value": "2055000.00",
+        "created_at": "2026-05-07T06:44:30.971Z",
+        "updated_at": "2026-05-07T06:44:30.971Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 16,
+    "fields": {
+        "name": "Dinesh Chandimal",
+        "email": "dinesh.chandimal@softlogicholdings.lk",
+        "phone": "0762122225",
+        "company": "Softlogic Holdings",
+        "status": "Lost",
+        "source": "LinkedIn",
+        "salesperson": "Kamal Gunaratne",
+        "deal_value": "3835000.00",
+        "created_at": "2026-05-07T06:44:30.975Z",
+        "updated_at": "2026-05-07T06:44:30.975Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 17,
+    "fields": {
+        "name": "Pathum Nissanka",
+        "email": "pathum.nissanka@lankaioc.lk",
+        "phone": "0723504133",
+        "company": "Lanka IOC",
+        "status": "New",
+        "source": "Cold Call",
+        "salesperson": "Kamal Gunaratne",
+        "deal_value": "420000.00",
+        "created_at": "2026-05-07T06:44:30.979Z",
+        "updated_at": "2026-05-07T06:44:30.979Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 18,
+    "fields": {
+        "name": "Binura Fernando",
+        "email": "binura.fernando@dialogaxiata.lk",
+        "phone": "0748619043",
+        "company": "Dialog Axiata",
+        "status": "Qualified",
+        "source": "Email Campaign",
+        "salesperson": "Sunil Jayasundara",
+        "deal_value": "2520000.00",
+        "created_at": "2026-05-07T06:44:30.986Z",
+        "updated_at": "2026-05-07T06:44:30.986Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 19,
+    "fields": {
+        "name": "Lasith Malinga",
+        "email": "lasith.malinga@johnkeellsholdings.lk",
+        "phone": "0724120372",
+        "company": "John Keells Holdings",
+        "status": "Lost",
+        "source": "Email Campaign",
+        "salesperson": "Amila Perera",
+        "deal_value": "4520000.00",
+        "created_at": "2026-05-07T06:44:30.990Z",
+        "updated_at": "2026-05-07T06:44:30.990Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 20,
+    "fields": {
+        "name": "Lahiru Kumara",
+        "email": "lahiru.kumara@lankawalltiles.lk",
+        "phone": "0766711514",
+        "company": "Lanka Walltiles",
+        "status": "Contacted",
+        "source": "LinkedIn",
+        "salesperson": "Amila Perera",
+        "deal_value": "3510000.00",
+        "created_at": "2026-05-07T06:44:30.994Z",
+        "updated_at": "2026-05-07T06:44:30.994Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 21,
+    "fields": {
+        "name": "Kamindu Mendis",
+        "email": "kamindu.mendis@aitkenspence.lk",
+        "phone": "0736762031",
+        "company": "Aitken Spence",
+        "status": "Won",
+        "source": "Email Campaign",
+        "salesperson": "Sunil Jayasundara",
+        "deal_value": "1365000.00",
+        "created_at": "2026-05-07T08:22:39.630Z",
+        "updated_at": "2026-05-07T08:22:39.630Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 22,
+    "fields": {
+        "name": "Lasith Malinga",
+        "email": "lasith.malinga@vallibelone.lk",
+        "phone": "0789983051",
+        "company": "Vallibel One",
+        "status": "Qualified",
+        "source": "Email Campaign",
+        "salesperson": "Amila Perera",
+        "deal_value": "4575000.00",
+        "created_at": "2026-05-07T08:22:39.643Z",
+        "updated_at": "2026-05-07T08:22:39.643Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 23,
+    "fields": {
+        "name": "Kasun Kalhara",
+        "email": "kasun.kalhara@richardpieris&co.lk",
+        "phone": "0772383074",
+        "company": "Richard Pieris & Co",
+        "status": "New",
+        "source": "Email Campaign",
+        "salesperson": "Kamal Gunaratne",
+        "deal_value": "2930000.00",
+        "created_at": "2026-05-07T08:22:39.651Z",
+        "updated_at": "2026-05-07T08:22:39.651Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 24,
+    "fields": {
+        "name": "Nuwan Kulasekara",
+        "email": "nuwan.kulasekara@hayleysplc.lk",
+        "phone": "0752378653",
+        "company": "Hayleys PLC",
+        "status": "Proposal Sent",
+        "source": "Referral",
+        "salesperson": "Kamal Gunaratne",
+        "deal_value": "2280000.00",
+        "created_at": "2026-05-07T08:22:39.657Z",
+        "updated_at": "2026-05-07T08:22:39.657Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 25,
+    "fields": {
+        "name": "Angelo Mathews",
+        "email": "angelo.mathews@srilankatelecom.lk",
+        "phone": "0772509654",
+        "company": "Sri Lanka Telecom",
+        "status": "Contacted",
+        "source": "Website",
+        "salesperson": "Amila Perera",
+        "deal_value": "4035000.00",
+        "created_at": "2026-05-07T08:22:39.663Z",
+        "updated_at": "2026-05-07T08:22:39.663Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 26,
+    "fields": {
+        "name": "Wanindu Hasaranga",
+        "email": "wanindu.hasaranga@hayleysplc.lk",
+        "phone": "0705650612",
+        "company": "Hayleys PLC",
+        "status": "Contacted",
+        "source": "Cold Call",
+        "salesperson": "Sunil Jayasundara",
+        "deal_value": "2010000.00",
+        "created_at": "2026-05-07T08:22:39.668Z",
+        "updated_at": "2026-05-07T08:22:39.668Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 27,
+    "fields": {
+        "name": "Charith Asalanka",
+        "email": "charith.asalanka@srilankatelecom.lk",
+        "phone": "0732332183",
+        "company": "Sri Lanka Telecom",
+        "status": "Won",
+        "source": "Website",
+        "salesperson": "Sunil Jayasundara",
+        "deal_value": "2015000.00",
+        "created_at": "2026-05-07T08:22:39.673Z",
+        "updated_at": "2026-05-07T08:22:39.673Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 28,
+    "fields": {
+        "name": "Dunith Wellalage",
+        "email": "dunith.wellalage@accessengineering.lk",
+        "phone": "0754972404",
+        "company": "Access Engineering",
+        "status": "Contacted",
+        "source": "LinkedIn",
+        "salesperson": "Amila Perera",
+        "deal_value": "380000.00",
+        "created_at": "2026-05-07T08:22:39.678Z",
+        "updated_at": "2026-05-07T08:22:39.678Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 29,
+    "fields": {
+        "name": "Kasun Kalhara",
+        "email": "kasun.kalhara@lankaioc.lk",
+        "phone": "0728000640",
+        "company": "Lanka IOC",
+        "status": "Proposal Sent",
+        "source": "Cold Call",
+        "salesperson": "Nimal Siriwardena",
+        "deal_value": "3380000.00",
+        "created_at": "2026-05-07T08:22:39.682Z",
+        "updated_at": "2026-05-07T08:22:39.682Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 30,
+    "fields": {
+        "name": "Dimuth Karunaratne",
+        "email": "dimuth.karunaratne@sampathbank.lk",
+        "phone": "0718762701",
+        "company": "Sampath Bank",
+        "status": "Lost",
+        "source": "LinkedIn",
+        "salesperson": "Kamal Gunaratne",
+        "deal_value": "3470000.00",
+        "created_at": "2026-05-07T08:22:39.690Z",
+        "updated_at": "2026-05-07T08:22:39.690Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 31,
+    "fields": {
+        "name": "Vishwa Fernando",
+        "email": "vishwa.fernando@dialogaxiata.lk",
+        "phone": "0759630014",
+        "company": "Dialog Axiata",
+        "status": "New",
+        "source": "Email Campaign",
+        "salesperson": "Sunil Jayasundara",
+        "deal_value": "4900000.00",
+        "created_at": "2026-05-07T08:22:39.694Z",
+        "updated_at": "2026-05-07T08:22:39.694Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 32,
+    "fields": {
+        "name": "Bhanuka Rajapaksa",
+        "email": "bhanuka.rajapaksa@hemasholdings.lk",
+        "phone": "0782820940",
+        "company": "Hemas Holdings",
+        "status": "Qualified",
+        "source": "Facebook",
+        "salesperson": "Sunil Jayasundara",
+        "deal_value": "2355000.00",
+        "created_at": "2026-05-07T08:22:39.699Z",
+        "updated_at": "2026-05-07T08:22:39.699Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 33,
+    "fields": {
+        "name": "Wanindu Hasaranga",
+        "email": "wanindu.hasaranga@commercialbank.lk",
+        "phone": "0779676724",
+        "company": "Commercial Bank",
+        "status": "New",
+        "source": "Facebook",
+        "salesperson": "Amila Perera",
+        "deal_value": "390000.00",
+        "created_at": "2026-05-07T08:22:39.703Z",
+        "updated_at": "2026-05-07T08:22:39.703Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 34,
+    "fields": {
+        "name": "Dimuth Karunaratne",
+        "email": "dimuth.karunaratne@softlogicholdings.lk",
+        "phone": "0777466541",
+        "company": "Softlogic Holdings",
+        "status": "Contacted",
+        "source": "Website",
+        "salesperson": "Sunil Jayasundara",
+        "deal_value": "2950000.00",
+        "created_at": "2026-05-07T08:22:39.708Z",
+        "updated_at": "2026-05-07T08:22:39.708Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 35,
+    "fields": {
+        "name": "Kusal Mendis",
+        "email": "kusal.mendis@commercialbank.lk",
+        "phone": "0715590266",
+        "company": "Commercial Bank",
+        "status": "Won",
+        "source": "Cold Call",
+        "salesperson": "Kamal Gunaratne",
+        "deal_value": "3860000.00",
+        "created_at": "2026-05-07T08:22:39.713Z",
+        "updated_at": "2026-05-07T08:22:39.713Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 36,
+    "fields": {
+        "name": "Kusal Mendis",
+        "email": "kusal.mendis@masholdings.lk",
+        "phone": "0778468525",
+        "company": "MAS Holdings",
+        "status": "Qualified",
+        "source": "Cold Call",
+        "salesperson": "Amila Perera",
+        "deal_value": "205000.00",
+        "created_at": "2026-05-07T08:22:39.719Z",
+        "updated_at": "2026-05-07T08:22:39.719Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 37,
+    "fields": {
+        "name": "Dunith Wellalage",
+        "email": "dunith.wellalage@softlogicholdings.lk",
+        "phone": "0776799467",
+        "company": "Softlogic Holdings",
+        "status": "Lost",
+        "source": "Cold Call",
+        "salesperson": "Amila Perera",
+        "deal_value": "3225000.00",
+        "created_at": "2026-05-07T08:22:39.723Z",
+        "updated_at": "2026-05-07T08:22:39.723Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 39,
+    "fields": {
+        "name": "Bhanuka Rajapaksa",
+        "email": "bhanuka.rajapaksa@brandixlanka.lk",
+        "phone": "0704129497",
+        "company": "Brandix Lanka",
+        "status": "Lost",
+        "source": "Cold Call",
+        "salesperson": "Kamal Gunaratne",
+        "deal_value": "255000.00",
+        "created_at": "2026-05-07T08:22:39.733Z",
+        "updated_at": "2026-05-07T18:02:23.909Z"
+    }
+},
+{
+    "model": "leads.lead",
+    "pk": 40,
+    "fields": {
+        "name": "Pathum Nissanka",
+        "email": "pathum.nissanka@cargillsceylon.lk",
+        "phone": "0747863580",
+        "company": "Cargills Ceylon",
+        "status": "New",
+        "source": "Referral",
+        "salesperson": "Nimal Siriwardena",
+        "deal_value": "2460000.00",
+        "created_at": "2026-05-07T08:22:39.738Z",
+        "updated_at": "2026-05-07T18:53:09.416Z"
+    }
+},
+{
+    "model": "leads.note",
+    "pk": 1,
+    "fields": {
+        "lead": 1,
+        "content": "Initial discovery call completed. High interest in enterprise plan.",
+        "created_at": "2026-05-07T17:43:36.804Z",
+        "created_by": "admin@example.com"
+    }
+},
+{
+    "model": "leads.note",
+    "pk": 2,
+    "fields": {
+        "lead": 1,
+        "content": "Technical requirement document shared with the stakeholder.",
+        "created_at": "2026-05-07T17:43:36.821Z",
+        "created_by": "admin@example.com"
+    }
+},
+{
+    "model": "leads.note",
+    "pk": 3,
+    "fields": {
+        "lead": 1,
+        "content": "Follow-up meeting scheduled for next week to discuss pricing.",
+        "created_at": "2026-05-07T17:43:36.833Z",
+        "created_by": "admin@example.com"
+    }
+},
+{
+    "model": "leads.note",
+    "pk": 4,
+    "fields": {
+        "lead": 1,
+        "content": "Customer requested a demo of the analytics dashboard.",
+        "created_at": "2026-05-07T17:43:36.842Z",
+        "created_by": "admin@example.com"
+    }
+},
+{
+    "model": "leads.note",
+    "pk": 5,
+    "fields": {
+        "lead": 2,
+        "content": "Sent technical proposal via email.",
+        "created_at": "2026-05-07T17:44:16.614Z",
+        "created_by": "admin@example.com"
+    }
+},
+{
+    "model": "leads.note",
+    "pk": 6,
+    "fields": {
+        "lead": 2,
+        "content": "Discussed integration possibilities with their existing CRM.",
+        "created_at": "2026-05-07T17:44:16.620Z",
+        "created_by": "admin@example.com"
+    }
+},
+{
+    "model": "leads.note",
+    "pk": 7,
+    "fields": {
+        "lead": 2,
+        "content": "Pricing negotiation in progress. Requested a 10% discount.",
+        "created_at": "2026-05-07T17:44:16.626Z",
+        "created_by": "admin@example.com"
+    }
+},
+{
+    "model": "leads.note",
+    "pk": 8,
+    "fields": {
+        "lead": 2,
+        "content": "Contract drafted and sent for review.",
+        "created_at": "2026-05-07T17:44:16.633Z",
+        "created_by": "admin@example.com"
+    }
+},
+{
+    "model": "leads.note",
+    "pk": 9,
+    "fields": {
+        "lead": 40,
+        "content": "Handover the project documentation to the Senior Manager.",
+        "created_at": "2026-05-07T17:50:57.706Z",
+        "created_by": "admin"
+    }
+}
+]
