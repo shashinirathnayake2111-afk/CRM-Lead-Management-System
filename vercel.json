@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "name": "uplift-crm-debug-v2",
   "builds": [
     {
       "src": "backend/uplift_backend/wsgi.py",
