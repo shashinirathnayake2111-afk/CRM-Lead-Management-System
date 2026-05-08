@@ -4,13 +4,14 @@ from rest_framework import status, generics
 from .models import Lead, Note
 from .serializers import LeadSerializer, NoteSerializer, CustomTokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-
-class CustomTokenObtainPairView(TokenObtainPairView):
-    serializer_class = CustomTokenObtainPairSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.contrib.auth.models import User
 from django.db.models import Sum, Q
 from django.db import models
+import os
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
 
 class LeadListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
@@ -107,3 +108,13 @@ class RegisterView(APIView):
             return Response({'message': 'User created successfully'}, status=status.HTTP_201_CREATED)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class HealthCheckView(APIView):
+    permission_classes = [AllowAny]
+    def get(self, request):
+        db_url = os.getenv('DATABASE_URL')
+        return Response({
+            "status": "online",
+            "database_configured": bool(db_url),
+            "database_type": "postgresql" if db_url and "postgres" in db_url else "sqlite"
+        })

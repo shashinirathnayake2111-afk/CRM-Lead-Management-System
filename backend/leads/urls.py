@@ -8,4 +8,5 @@ urlpatterns = [
     path('notes/<int:pk>/', NoteDetailView.as_view(), name='note-detail'),
     path('dashboard/', DashboardStatsView.as_view(), name='dashboard-stats'),
     path('auth/register/', RegisterView.as_view(), name='register'),
+    path('health/', HealthCheckView.as_view(), name='health'),
 ]
