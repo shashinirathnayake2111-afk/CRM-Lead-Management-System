@@ -34,7 +34,8 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-8&ed7(xd7rmch(%=z1cq2qh$_6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1')
 
-ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1', 'uplift-crm.vercel.app']
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # Application definition
@@ -140,6 +141,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True  # For development
 CSRF_TRUSTED_ORIGINS = [
     'https://*.vercel.app',
+    'https://uplift-crm.vercel.app',
     'http://localhost:5173',
 ]
 

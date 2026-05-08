@@ -34,7 +34,8 @@ const Signup = () => {
       localStorage.setItem('hasVisited', 'true');
       navigate('/login');
     } catch (err) {
-      setError(err.response?.data?.error || 'Registration failed. Please try again.');
+      const errorMessage = err.response?.data?.error || err.response?.data?.detail || 'Registration failed. Please try again.';
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }

@@ -22,7 +22,8 @@ const Login = () => {
       localStorage.setItem('hasVisited', 'true');
       navigate('/');
     } catch (err) {
-      setError('Invalid email or password. Please try again.');
+      const errorMessage = err.response?.data?.detail || err.response?.data?.error || 'Invalid username or password. Please try again.';
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
