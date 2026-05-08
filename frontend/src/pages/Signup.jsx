@@ -34,8 +34,10 @@ const Signup = () => {
       localStorage.setItem('hasVisited', 'true');
       navigate('/login');
     } catch (err) {
-      const errorMessage = err.response?.data?.error || err.response?.data?.detail || 'Registration failed. Please try again.';
-      setError(errorMessage);
+      console.error('Signup Error:', err);
+      const data = err.response?.data;
+      const errorMessage = typeof data === 'string' ? data : (data?.detail || data?.error || data?.message || 'Registration failed. Please try again.');
+      setError(typeof errorMessage === 'object' ? JSON.stringify(errorMessage) : errorMessage);
     } finally {
       setLoading(false);
     }

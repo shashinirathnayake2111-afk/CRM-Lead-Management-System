@@ -22,8 +22,10 @@ const Login = () => {
       localStorage.setItem('hasVisited', 'true');
       navigate('/');
     } catch (err) {
-      const errorMessage = err.response?.data?.detail || err.response?.data?.error || 'Invalid username or password. Please try again.';
-      setError(errorMessage);
+      console.error('Login Error:', err);
+      const data = err.response?.data;
+      const errorMessage = typeof data === 'string' ? data : (data?.detail || data?.error || data?.message || 'Invalid username or password. Please try again.');
+      setError(typeof errorMessage === 'object' ? JSON.stringify(errorMessage) : errorMessage);
     } finally {
       setLoading(false);
     }

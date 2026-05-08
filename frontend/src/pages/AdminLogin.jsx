@@ -21,8 +21,10 @@ const AdminLogin = () => {
       localStorage.setItem('hasVisited', 'true');
       navigate('/');
     } catch (err) {
-      const errorMessage = err.response?.data?.detail || err.response?.data?.error || 'Administrative authorization failed. Check your credentials.';
-      setError(errorMessage);
+      console.error('Admin Login Error:', err);
+      const data = err.response?.data;
+      const errorMessage = typeof data === 'string' ? data : (data?.detail || data?.error || data?.message || 'Administrative authorization failed. Check your credentials.');
+      setError(typeof errorMessage === 'object' ? JSON.stringify(errorMessage) : errorMessage);
     } finally {
       setLoading(false);
     }
