@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import { 
   Users, 
   Trophy, 
@@ -113,6 +114,7 @@ const StatCard = ({ title, value, icon: Icon, color, trend }) => {
 
 const Dashboard = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [stats, setStats] = useState(null);
   const [leads, setLeads] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -140,16 +142,25 @@ const Dashboard = () => {
     setError(null);
     try {
       const [statsRes, leadsRes] = await Promise.all([
-        api.get('dashboard/'),
-        api.get('leads/')
+        api.get('dashboard/').catch(err => ({ data: null, error: err })),
+        api.get('leads/').catch(err => ({ data: [], error: err }))
       ]);
       
-      if (statsRes.data) setStats(statsRes.data);
-      if (Array.isArray(leadsRes.data)) setLeads(leadsRes.data.slice(0, 5));
+      if (statsRes.data) {
+        setStats(statsRes.data);
+      } else if (statsRes.error) {
+        console.error('Stats fetch failed:', statsRes.error);
+      }
+
+      if (Array.isArray(leadsRes.data)) {
+        setLeads(leadsRes.data.slice(0, 5));
+      } else if (leadsRes.error) {
+        console.error('Leads fetch failed:', leadsRes.error);
+      }
       
     } catch (err) {
       console.error('Dashboard Fetch Error:', err);
-      setError(err.response?.data?.detail || err.response?.data?.error || 'Failed to sync intelligence data. Please verify your connection.');
+      setError('Failed to synchronize with the intelligence mainframe.');
     } finally {
       setLoading(false);
     }
@@ -186,7 +197,8 @@ const Dashboard = () => {
             ? [12, 19, 3, 5, 2, 0, 0, 0, 0, 0, 0, 0]
             : [12, 19, 3, 5, 2, 0],
           backgroundColor: (context) => {
-            const ctx = context.chart.ctx;
+            const ctx = context.chart?.ctx;
+            if (!ctx) return 'rgba(99, 102, 241, 0.5)';
             const gradient = ctx.createLinearGradient(0, 0, 0, 300);
             gradient.addColorStop(0, 'rgba(99, 102, 241, 0.8)');
             gradient.addColorStop(1, 'rgba(99, 102, 241, 0.1)');
@@ -201,7 +213,8 @@ const Dashboard = () => {
             ? [7, 11, 5, 8, 3, 0, 0, 0, 0, 0, 0, 0]
             : [7, 11, 5, 8, 3, 0],
           backgroundColor: (context) => {
-            const ctx = context.chart.ctx;
+            const ctx = context.chart?.ctx;
+            if (!ctx) return 'rgba(16, 185, 129, 0.5)';
             const gradient = ctx.createLinearGradient(0, 0, 0, 300);
             gradient.addColorStop(0, 'rgba(16, 185, 129, 0.8)');
             gradient.addColorStop(1, 'rgba(16, 185, 129, 0.1)');
@@ -364,7 +377,7 @@ const Dashboard = () => {
                 <p className="text-slate-500 text-sm font-medium mt-1">High-intent leads requiring immediate action</p>
               </div>
               <button 
-                onClick={() => window.location.href='/leads'} 
+                onClick={() => navigate('/leads')} 
                 className="group flex items-center gap-2 px-6 py-3 rounded-2xl bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500 hover:text-white transition-all duration-300 font-bold text-xs"
               >
                 Full Database
@@ -389,7 +402,7 @@ const Dashboard = () => {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.1 * idx }}
                         className="hover:bg-white/[0.03] transition-colors cursor-pointer group"
-                        onClick={() => window.location.href=`/leads/${lead.id}`}
+                        onClick={() => navigate(`/leads/${lead.id}`)}
                       >
                         <td className="px-10 py-6">
                           <div className="flex items-center gap-4">
