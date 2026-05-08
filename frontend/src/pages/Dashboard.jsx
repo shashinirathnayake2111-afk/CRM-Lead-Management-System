@@ -394,10 +394,10 @@ const Dashboard = () => {
                         <td className="px-10 py-6">
                           <div className="flex items-center gap-4">
                             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-white/10 flex items-center justify-center text-indigo-400 font-black text-sm">
-                              {lead.name.charAt(0)}
+                              {(lead.name || 'A').charAt(0)}
                             </div>
                             <div>
-                              <div className="text-sm font-black text-white group-hover:text-indigo-400 transition-colors">{lead.name}</div>
+                              <div className="text-sm font-black text-white group-hover:text-indigo-400 transition-colors">{lead.name || 'Anonymous Prospect'}</div>
                               <div className="text-[10px] font-bold text-slate-500 uppercase tracking-tighter mt-0.5">{lead.company || 'Direct Client'}</div>
                             </div>
                           </div>
@@ -413,7 +413,7 @@ const Dashboard = () => {
                           </span>
                         </td>
                         <td className="px-10 py-6 text-xs font-bold text-slate-400">
-                          {new Date(lead.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                          {lead.created_at ? new Date(lead.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : 'Recently'}
                         </td>
                       </motion.tr>
                     ))}

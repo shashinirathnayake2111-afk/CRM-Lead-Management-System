@@ -95,7 +95,7 @@ const Management = () => {
 
   const fetchLeads = async () => {
     try {
-      const response = await api.get('/leads/');
+      const response = await api.get('leads/');
       if (response.data.length > 0) {
         setLeads(response.data);
       } else {
@@ -115,7 +115,7 @@ const Management = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Confirm permanent deletion of this lead?')) {
       try {
-        await api.delete(`/leads/${id}/`);
+        await api.delete(`leads/${id}/`);
         fetchLeads();
       } catch (err) {
         console.error(err);
@@ -125,7 +125,7 @@ const Management = () => {
 
   const handleStatusUpdate = async (id, newStatus) => {
     try {
-      await api.patch(`/leads/${id}/`, { status: newStatus });
+      await api.patch(`leads/${id}/`, { status: newStatus });
       fetchLeads();
     } catch (err) {
       console.error(err);
@@ -137,7 +137,7 @@ const Management = () => {
     if (!noteContent.trim()) return;
     setSubmittingNote(true);
     try {
-      await api.post(`/leads/${noteModal.leadId}/notes/`, { content: noteContent });
+      await api.post(`leads/${noteModal.leadId}/notes/`, { content: noteContent });
       setNoteContent('');
       setNoteModal({ open: false, leadId: null, leadName: '' });
       alert('Intelligence entry recorded successfully.');
