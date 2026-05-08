@@ -37,7 +37,7 @@ const LeadForm = () => {
     if (isEdit) {
       const fetchLead = async () => {
         try {
-          const response = await api.get(`/leads/${id}/`);
+          const response = await api.get(`leads/${id}/`);
           setFormData(response.data);
         } catch (err) {
           console.error(err);
@@ -51,9 +51,9 @@ const LeadForm = () => {
     e.preventDefault();
     try {
       if (isEdit) {
-        await api.put(`/leads/${id}/`, formData);
+        await api.put(`leads/${id}/`, formData);
       } else {
-        await api.post('/leads/', formData);
+        await api.post('leads/', formData);
       }
       navigate('/leads');
     } catch (err) {

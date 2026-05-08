@@ -140,8 +140,8 @@ const Dashboard = () => {
     setError(null);
     try {
       const [statsRes, leadsRes] = await Promise.all([
-        api.get('/dashboard/'),
-        api.get('/leads/')
+        api.get('dashboard/'),
+        api.get('leads/')
       ]);
       
       if (statsRes.data) setStats(statsRes.data);
@@ -163,7 +163,7 @@ const Dashboard = () => {
     e.preventDefault();
     setFormLoading(true);
     try {
-      await api.post('/leads/', newLead);
+      await api.post('leads/', newLead);
       setNewLead({ name: '', email: '', status: 'New' });
       fetchData();
     } catch (err) {

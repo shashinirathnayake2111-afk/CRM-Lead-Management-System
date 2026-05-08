@@ -68,7 +68,7 @@ const LeadList = () => {
   const fetchLeads = async () => {
     setLoading(true);
     try {
-      const response = await api.get('/leads/', {
+      const response = await api.get('leads/', {
         params: { 
           search, 
           status: statusFilter,
@@ -93,7 +93,7 @@ const LeadList = () => {
     if (!noteContent.trim()) return;
     setSubmittingNote(true);
     try {
-      await api.post(`/leads/${noteModal.leadId}/notes/`, { content: noteContent });
+      await api.post(`leads/${noteModal.leadId}/notes/`, { content: noteContent });
       setNoteContent('');
       setNoteModal({ open: false, leadId: null, leadName: '' });
       alert('Intelligence entry recorded successfully.');
@@ -109,7 +109,7 @@ const LeadList = () => {
     e.stopPropagation();
     if (window.confirm('Terminate this lead record? This action is irreversible.')) {
       try {
-        await api.delete(`/leads/${id}/`);
+        await api.delete(`leads/${id}/`);
         fetchLeads();
       } catch (err) {
         console.error(err);

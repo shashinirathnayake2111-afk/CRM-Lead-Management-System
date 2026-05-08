@@ -56,7 +56,7 @@ const LeadIntelligence = () => {
 
   const fetchData = async () => {
     try {
-      const response = await api.get('/leads/');
+      const response = await api.get('leads/');
       if (response.data.length > 0) {
         setLeads(response.data);
       } else {

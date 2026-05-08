@@ -38,8 +38,8 @@ const LeadDetail = () => {
   const fetchData = async () => {
     try {
       const [leadRes, notesRes] = await Promise.all([
-        api.get(`/leads/${id}/`),
-        api.get(`/leads/${id}/notes/`)
+        api.get(`leads/${id}/`),
+        api.get(`leads/${id}/notes/`)
       ]);
       setLead(leadRes.data);
       setNotes(notesRes.data);
@@ -59,7 +59,7 @@ const LeadDetail = () => {
     e.preventDefault();
     if (!newNote.trim()) return;
     try {
-      await api.post(`/leads/${id}/notes/`, { content: newNote });
+      await api.post(`leads/${id}/notes/`, { content: newNote });
       setNewNote('');
       fetchData();
     } catch (err) {
@@ -81,7 +81,7 @@ const LeadDetail = () => {
     if (!editContent.trim()) return;
     setSubmittingNote(true);
     try {
-      await api.patch(`/notes/${noteId}/`, { content: editContent });
+      await api.patch(`notes/${noteId}/`, { content: editContent });
       setEditingNoteId(null);
       fetchData();
     } catch (err) {
@@ -100,7 +100,7 @@ const LeadDetail = () => {
   const handleDeleteNote = async (noteId) => {
     if (window.confirm('Delete this intelligence entry?')) {
       try {
-        await api.delete(`/notes/${noteId}/`);
+        await api.delete(`notes/${noteId}/`);
         fetchData();
       } catch (err) {
         console.error(err);
@@ -111,7 +111,7 @@ const LeadDetail = () => {
   const handleDelete = async () => {
     if (window.confirm('Are you sure you want to delete this lead? This action cannot be undone.')) {
       try {
-        await api.delete(`/leads/${id}/`);
+        await api.delete(`leads/${id}/`);
         navigate('/leads');
       } catch (err) {
         console.error(err);
