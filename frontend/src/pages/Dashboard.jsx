@@ -120,6 +120,7 @@ const Dashboard = () => {
   const [newLead, setNewLead] = useState({ name: '', email: '', status: 'New' });
   const [greeting, setGreeting] = useState('');
   const [timeRange, setTimeRange] = useState('Last 6 Months');
+  const [error, setError] = useState(null);
 
   // Extract name from email for a more personal touch
   const displayName = useMemo(() => {
@@ -136,15 +137,19 @@ const Dashboard = () => {
   }, []);
 
   const fetchData = async () => {
+    setError(null);
     try {
       const [statsRes, leadsRes] = await Promise.all([
         api.get('/dashboard/'),
         api.get('/leads/')
       ]);
-      setStats(statsRes.data);
-      setLeads(leadsRes.data.slice(0, 5));
+      
+      if (statsRes.data) setStats(statsRes.data);
+      if (Array.isArray(leadsRes.data)) setLeads(leadsRes.data.slice(0, 5));
+      
     } catch (err) {
-      console.error(err);
+      console.error('Dashboard Fetch Error:', err);
+      setError(err.response?.data?.detail || err.response?.data?.error || 'Failed to sync intelligence data. Please verify your connection.');
     } finally {
       setLoading(false);
     }
@@ -247,14 +252,32 @@ const Dashboard = () => {
   };
 
   if (loading) return (
-    <div className="flex flex-col items-center justify-center h-screen gap-4">
+    <div className="flex flex-col items-center justify-center h-[80vh] gap-4">
       <div className="relative">
         <div className="w-16 h-16 border-4 border-indigo-500/20 border-t-indigo-500 rounded-full animate-spin" />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="w-8 h-8 bg-indigo-500/10 rounded-full blur-xl animate-pulse" />
         </div>
       </div>
-      <p className="text-slate-500 font-medium animate-pulse">Initializing Dashboard...</p>
+      <p className="text-slate-500 font-black uppercase tracking-[0.3em] animate-pulse text-[10px]">Initializing Dashboard...</p>
+    </div>
+  );
+
+  if (error) return (
+    <div className="flex flex-col items-center justify-center h-[80vh] gap-6 text-center px-4">
+      <div className="w-20 h-20 bg-rose-500/10 rounded-[2.5rem] flex items-center justify-center border border-rose-500/20 shadow-2xl shadow-rose-500/10">
+        <Activity className="w-10 h-10 text-rose-500" />
+      </div>
+      <div className="max-w-md">
+        <h2 className="text-2xl font-black text-white tracking-tight mb-2 uppercase">Sync Interrupted</h2>
+        <p className="text-slate-500 font-medium text-sm leading-relaxed">{error}</p>
+      </div>
+      <button 
+        onClick={() => { setLoading(true); fetchData(); }}
+        className="px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl text-xs font-black uppercase tracking-widest transition-all active:scale-95"
+      >
+        Re-establish Connection
+      </button>
     </div>
   );
 
